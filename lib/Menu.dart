@@ -6,7 +6,9 @@ import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/EditDoctorProfile.dart';
 import 'package:hp_assistant/EditPassword.dart';
 import 'package:hp_assistant/HomePage.dart';
+import 'package:hp_assistant/LoginPage.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Menu extends StatefulWidget {
   @override
@@ -16,6 +18,15 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
 
   int _key;
+
+
+  _save(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = token;
+    prefs.setString(key, value);
+  }
+
 
   _collapse() {
     int newKey;
@@ -235,7 +246,14 @@ class _MenuState extends State<Menu> {
                 height: 80,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
-                onPressed: null,
+                onPressed: (){
+                  _save('0');
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(
+                        builder: (BuildContext context) => new LoginPage(),
+                      )
+                  );
+                },
                 icon: Icon(Icons.logout),
                 label: Text(
                   'L o g  o u t ',
