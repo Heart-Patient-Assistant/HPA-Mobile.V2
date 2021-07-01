@@ -260,15 +260,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
                       }
                       else {
-                        // setState(() {
-                        //   _futureRegister = databaseHelper.registerData(
-                        //       email.text.trim().toLowerCase(),
-                        //       firstName.text.trim(),
-                        //       lastName.text.trim(),
-                        //       password.text.trim(),
-                        //       repeatPassword.text.trim(),
-                        //      this.typeUser.trim());
-                        // });
+                        setState(() {
+                          _futureRegister = databaseHelper.registerData(
+                              email.text.trim().toLowerCase(),
+                              firstName.text.trim(),
+                              lastName.text.trim(),
+                              password.text.trim(),
+                              repeatPassword.text.trim(),
+                              this.typeUser.trim());
+                        });
 
                         if (this.typeUser.contains('DOCTOR') ){
                           Navigator.pushAndRemoveUntil(

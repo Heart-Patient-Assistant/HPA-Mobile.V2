@@ -1,10 +1,8 @@
 import 'dart:ui';
-import 'package:hp_assistant/databasehelpler.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import 'HomePage.dart';
+import 'databasehelpler.dart';
 
 class FB extends StatefulWidget {
   FB({Key key}) : super(key: key);
@@ -14,23 +12,35 @@ class FB extends StatefulWidget {
 
 class _FBState extends State<FB> {
 
-
-
-
   DatabaseHelper databaseHelper = new DatabaseHelper();
-  String rate;
+  String rate='';
   int radioGroup = 0;
-  String feedback_category;
+  String feedbackCategory='';
 
-  Future<FB> _futureFB;
   final TextEditingController _textController = new TextEditingController();
+  Future<FB> _futureFB;
+
 
   void radioEventHandler(int value) {
     setState(() {
       radioGroup = value;
-      if (radioGroup ==1){feedback_category = "suggest";}
-      else if (radioGroup ==2){feedback_category = "complain";}
-      else{feedback_category = "complement";}
+      if (radioGroup ==1){
+        setState(() {
+          this.feedbackCategory = 'suggest';
+          print(this.feedbackCategory);
+        });}
+      else if (radioGroup ==2){
+        setState(() {
+          this.feedbackCategory = 'complain';
+          print(this.feedbackCategory);
+
+        });}
+      else if (radioGroup ==3){
+        setState(() {
+          this.feedbackCategory = 'complement';
+          print(this.feedbackCategory);
+
+        });}
     });
   }
 
@@ -88,15 +98,44 @@ class _FBState extends State<FB> {
                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                      itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber,),
                      onRatingUpdate: (rating) {
-                       print(rating);
-                       if (rating ==1.0){rate="verybad";}
-                       else if (rating == 2.0){rate ="notbad";}
-                       else if (rating == 3.0){rate ="good";}
-                       else if (rating == 4.0){rate ="verygood";}
-                       else if (rating == 0.0){rate ="null";}
-                       else{rate = "excellent";}
-                       print(rate);
+
+                       if (rating ==1.0){
+                         setState(() {
+                           this.rate='verybad';
+                           print(this.rate);
+
+                         });}
+                       else if (rating == 2.0){
+                         setState(() {
+                           this.rate='notbad';
+                           print(this.rate);
+
+                         });}
+                       else if (rating == 3.0){
+                         setState(() {
+                           this.rate='good';
+                           print(this.rate);
+
+                         });}
+                       else if (rating == 4.0){
+                         setState(() {
+                           this.rate ='verygood';
+                           print(this.rate);
+
+                         });
+                         return this.rate ='excellent';}
+                       else if (rating == 5.0){
+                         setState(() {
+                           this.rate='excellent';
+                           print(this.rate);
+
+                         });}
+                       else if(rating == 0.0){
+                         setState(() {
+                           this.rate='null';
+                         });}
                        },
+
                    ) ,
                  ),
                ],
@@ -159,7 +198,7 @@ class _FBState extends State<FB> {
              new RaisedButton(
                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                onPressed: () {
-                 if (_textController.text.trim().isEmpty && rate == 0.0 && radioGroup ==0 ){
+                 if (_textController.text.trim().isEmpty && rate == 'null' && radioGroup ==0 ){
                    showDialog(
                        context: context,
                        builder: (context) {
@@ -178,64 +217,15 @@ class _FBState extends State<FB> {
                            ],
                          );
                        });
-                 } else if (_textController.text.trim().isEmpty  ) {
-                   showDialog(
-                       context: context,
-                       builder: (context) {
-                         return AlertDialog(
-                           title: new Text('Complete The Feedback', style: TextStyle(color: Colors.teal.shade600),),
-                           content: Text("Please Write Your Comment "),
-                           actions: [
-                             FlatButton(
-                                 onPressed: () {
-                                   Navigator.pop(context);
-                                 },
-                                 child: new Text(
-                                   'Ok',
-                                   style: TextStyle(color: Colors.blue),
-                                 ))
-                           ],
-                         );
-                       });
-                 } else if (rate == "null" ){
-                   showDialog(
-                       context: context,
-                       builder: (context) {
-                         return AlertDialog(
-                           title: new Text('Complete The Feedback', style: TextStyle(color: Colors.teal.shade600),),
-                           content: Text("Please Choose Your Rating "),
-                           actions: [
-                             FlatButton(
-                                 onPressed: () {
-                                   Navigator.pop(context);
-                                 },
-                                 child: new Text(
-                                   'Ok',
-                                   style: TextStyle(color: Colors.blue),
-                                 ))
-                           ],
-                         );
-                       });
-                 }else if (radioGroup ==0){
-                   showDialog(
-                       context: context,
-                       builder: (context) {
-                         return AlertDialog(
-                           title: new Text('Complete The Feedback', style: TextStyle(color: Colors.teal.shade600),),
-                           content: Text("Please Choose Category "),
-                           actions: [
-                             FlatButton(
-                                 onPressed: () {
-                                   Navigator.pop(context);
-                                 },
-                                 child: new Text(
-                                   'Ok',
-                                   style: TextStyle(color: Colors.blue),
-                                 ))
-                           ],
-                         );
-                       });
-                 } else {
+                 }else {
+                   print(_textController);
+                   setState(() {
+                     databaseHelper.FbData(
+                         this.rate.trim(),
+                         this.feedbackCategory.trim(),
+                         _textController.text.trim());
+                   });
+
                    showDialog(
                        context: context,
                        builder: (context) {
@@ -253,16 +243,7 @@ class _FBState extends State<FB> {
                            ],
                          );
                        });
-                   setState(() {
-                     _futureFB = databaseHelper.FBData(rate.trim(),_textController.text.trim(),feedback_category.trim()) ;
-                   });
 
-                   Navigator.pushAndRemoveUntil(
-                     context,
-                     MaterialPageRoute(
-                         builder: (BuildContext context) => HomePage()),
-                     ModalRoute.withName('/HomePage'),
-                   );
                  }
                },
                child: Text(
@@ -282,7 +263,9 @@ class _FBState extends State<FB> {
 
 
   ]
-      ));
+      )
+
+    );
 
   }
 

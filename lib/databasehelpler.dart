@@ -57,10 +57,9 @@ class DatabaseHelper{
         body: {
           "birth_date": "$birthDate",
           "location": "$location",
-        }).then((response){
-      print('Response status : ${response.statusCode}');
-      print('Response body : ${response.body}');
-    });
+        });
+    print('Response status : ${response.statusCode}');
+    print('Response body : ${response.body}');
   }
   Future<AddPatient> addPatientData(String birthDate,String location ) async {
     final prefs = await SharedPreferences.getInstance();
@@ -71,26 +70,26 @@ class DatabaseHelper{
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization' : 'Bearer $value'
-
         },
         body: {
           "birth_date": "$birthDate",
           "location": "$location",
-
-
-        }).then((response){
-      print('Response status : ${response.statusCode}');
-      print('Response body : ${response.body}');
-    });
+        });
+    print('Response status : ${response.statusCode}');
+    print('Response body : ${response.body}');
   }
-  Future<FB>FBData(String rate , String feedback_category , String msg) async{
-    final response = await  http.post(Uri.parse("http://mahdy.pythonanywhere.com/feedback/givefeedbackapi/"),
+  Future<FB>FbData(String rate , String feedbackCategory , String msg) async{
+    final response = await  http.post(Uri.parse("https://mahdy.pythonanywhere.com/feedback/givefeedbackapi/"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
         body: jsonEncode(<String, String>{
           "rate": "$rate",
-          "feedback_category": "$feedback_category",
-          "feedback_message": "$msg"
+          "feedbackCategory": "$feedbackCategory",
+          "msg": "$msg"
         } )) ;
     print(response.statusCode);
+    print(response.body);
 
   }
 
@@ -112,10 +111,9 @@ class DatabaseHelper{
           "password2" : "$password2",
           "birthDate" : "$birthDate",
           "location" : "$location",
-        }).then((response){
-      print('Response status : ${response.statusCode}');
-      print('Response body : ${response.body}');
-    });
+        });
+    print('Response status : ${response.statusCode}');
+    print('Response body : ${response.body}');
   }
   void editPatientData(String firstName ,String lastName ,String email , String password, String password2,String birthDate,String location,) async {
     final prefs = await SharedPreferences.getInstance();
@@ -137,10 +135,9 @@ class DatabaseHelper{
           "birthDate" : "$birthDate",
           "location" : "$location",
 
-        }).then((response){
-      print('Response status : ${response.statusCode}');
-      print('Response body : ${response.body}');
-    });
+        });
+    print('Response status : ${response.statusCode}');
+    print('Response body : ${response.body}');
   }
 
 
@@ -163,18 +160,15 @@ class DatabaseHelper{
 }
 class FB {
   final String rate;
+  final String feedbackCategory;
   final String msg;
-  final String feedback_category;
 
-
-  FB({this.rate, this.msg,this.feedback_category});
+  FB({this.rate, this.feedbackCategory, this.msg,});
   factory FB.fromJson(Map<String, dynamic> json) {
     return FB(
-      rate: json["rate"],
-      feedback_category: json['feedback_category'],
-        msg: json['msg'],
-
-
+      rate: json['rate'],
+      feedbackCategory: json['feedbackCategory'],
+      msg: json['msg'],
     );
   }
 }
