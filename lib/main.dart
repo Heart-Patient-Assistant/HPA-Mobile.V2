@@ -17,6 +17,7 @@ import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/Search.dart';
 import 'package:hp_assistant/Services.dart';
 import 'package:hp_assistant/Settings.dart';
+import 'package:hp_assistant/FB.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
 
 
@@ -50,6 +51,11 @@ class MyApp extends StatelessWidget {
         '/EditPatientProfile': (BuildContext context) => new EditPatientProfile(),
         '/EditDoctorProfile': (BuildContext context) => new EditDoctorProfile(),
         '/EditPassword': (BuildContext context) => new EditPassword(),
+        '/FB' : (BuildContext context) => new FB(),
+
+
+
+
 
 
 

@@ -62,8 +62,6 @@ class DatabaseHelper{
       print('Response body : ${response.body}');
     });
   }
-
-
   Future<AddPatient> addPatientData(String birthDate,String location ) async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';
@@ -85,9 +83,16 @@ class DatabaseHelper{
       print('Response body : ${response.body}');
     });
   }
+  Future<FB>FBData(String rate , String feedback_category , String msg) async{
+    final response = await  http.post(Uri.parse("http://mahdy.pythonanywhere.com/feedback/givefeedbackapi/"),
+        body: jsonEncode(<String, String>{
+          "rate": "$rate",
+          "feedback_category": "$feedback_category",
+          "feedback_message": "$msg"
+        } )) ;
+    print(response.statusCode);
 
-
-
+  }
 
   void editDoctorData(String firstName ,String lastName ,String email , String password, String password2,String birthDate,String location,) async {
     final prefs = await SharedPreferences.getInstance();
@@ -156,6 +161,23 @@ class DatabaseHelper{
 
 
 }
+class FB {
+  final String rate;
+  final String msg;
+  final String feedback_category;
+
+
+  FB({this.rate, this.msg,this.feedback_category});
+  factory FB.fromJson(Map<String, dynamic> json) {
+    return FB(
+      rate: json["rate"],
+      feedback_category: json['feedback_category'],
+        msg: json['msg'],
+
+
+    );
+  }
+}
 
 class Register {
   final String email;
@@ -189,7 +211,6 @@ class Login {
     );
   }
 }
-
 
 class AddDoctor{
   final String location;

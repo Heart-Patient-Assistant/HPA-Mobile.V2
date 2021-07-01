@@ -155,33 +155,91 @@ class _MenuState extends State<Menu> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              new FlatButton.icon(
-                height: 80,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/Contact');
-                },
-                icon: Icon(Icons.send_rounded),
-                label: Text(
-                  'C o n t a c t ',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              // new FlatButton.icon(
+              //   height: 80,
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(30)),
+              //   onPressed: () {
+              //     Navigator.of(context).pushNamed('/Contact');
+              //   },
+              //   icon: Icon(Icons.send_rounded),
+              //   label: Text(
+              //     'C o n t a c t ',
+              //     style: TextStyle(
+              //         fontSize: 22,
+              //         fontFamily: 'Raleway',
+              //         fontWeight: FontWeight.bold),
+              //   ),
+              // ),
+
+
               Stack(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 17.0,left: 112.5),
+                    padding: EdgeInsets.only(top: 17.0,left: 115),
+                    child:Icon(Icons.send_rounded),
+                  ),
+                  Container(
+                     padding: EdgeInsets.only(left: 28),
+
+                    margin: EdgeInsets.only(right: 55,left: 100),
+                    child: ExpansionTile(
+                      key: new Key(_key.toString()),
+                      initiallyExpanded: false,
+                      title: new Text('C o n t a c t ',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.bold),),
+                      children: [
+                        new ListTile(
+                          title: const Text(
+                            'Contact with us',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/Contact');
+
+                            _collapse();
+
+                          },
+                        ),
+                        new ListTile(
+                          title: const Text(
+                            'Feedback',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/FB');
+
+                            _collapse();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+
+
+
+
+              Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 28.0,left: 112.5),
 
                     child:Icon(Icons.settings_rounded),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 28,top: 10.0),
 
-                    margin: EdgeInsets.only(right: 55,left: 110),
+                    margin: EdgeInsets.only(right: 55,left: 100),
                     child: ExpansionTile(
                       key: new Key(_key.toString()),
                       initiallyExpanded: false,
@@ -243,7 +301,7 @@ class _MenuState extends State<Menu> {
               //   ),
               // ),
               new FlatButton.icon(
-                height: 80,
+                height: 70,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
                 onPressed: (){

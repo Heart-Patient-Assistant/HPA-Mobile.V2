@@ -61,6 +61,7 @@ class _BlogState extends State<Blog> {
     body: new Column(
       children: [
         new Container(
+          margin: EdgeInsets.only(top:20),
           child: Text(
             'The Blog ',
             style: TextStyle(
@@ -69,11 +70,15 @@ class _BlogState extends State<Blog> {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        new Container(alignment: Alignment.bottomRight,
-          margin: EdgeInsets.only(top:617, right:19),
-          child:new FloatingActionButton(onPressed: null,
-            child: Icon(Icons.add_rounded,color: Colors.white,size: 40,),
-            backgroundColor: Colors.teal.shade600,)
+        new Container(alignment: Alignment.center,
+          margin: EdgeInsets.only(top:50),
+          child:new FloatingActionButton(
+            onPressed: null,
+            child: Icon(
+                Icons.add_rounded,color: Colors.white,
+                size: 40,),
+               backgroundColor: Colors.teal.shade600,
+          )
           ,
         )
       ],

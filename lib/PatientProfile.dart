@@ -135,7 +135,7 @@ class _PatientProfileState extends State<PatientProfile> {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext context) => Menu()),
-                  ModalRoute.withName('/Done'),
+                  ModalRoute.withName('/Menu'),
                 );
               },
               icon: Icon(Icons.menu_rounded,
