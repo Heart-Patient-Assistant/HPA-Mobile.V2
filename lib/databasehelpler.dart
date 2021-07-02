@@ -23,10 +23,14 @@ class DatabaseHelper{
           "type" : "$type"
         } )) ;
     print(response.statusCode);
-    if (response.statusCode ==200) {
-      return Register.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to register');
+    var data = json.decode(response.body);
+
+    if(status = response.body.contains('non_field_errors')){
+      print('data : ${data["non_field_errors"]}');
+    }
+    else{
+      print('data : ${data["token"]}');
+      _save(data["token"]);
     }
   }
 

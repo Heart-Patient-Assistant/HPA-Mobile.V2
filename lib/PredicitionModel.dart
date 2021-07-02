@@ -81,14 +81,14 @@ class _PredictionModelState extends State<PredictionModel> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "Prediction",
-          textAlign: TextAlign.center,
+          'Predictions',
           style: TextStyle(
-            color: Colors.white,
-          ),
+              fontSize: 22,
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.blueGrey,
-      ),
+        backgroundColor: Colors.teal.shade600,
+      ) ,
       body: new Container(
         margin: EdgeInsets.only(left: 33.5, right: 33.5),
         child:
@@ -284,9 +284,24 @@ class _PredictionModelState extends State<PredictionModel> {
 
             new Padding(padding: EdgeInsets.all(10.0)),
 
-            new ElevatedButton(onPressed: (){
-              Predict();
-            }, child: Text("Predict"))
+            new RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              onPressed: () {
+                Predict();
+              },
+              child: Text(
+                "Predict",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              color: Colors.teal.shade600,
+              textColor: Colors.white,),
+            new Padding(padding: EdgeInsets.all(10.0)),
+
           ],
         ),
 

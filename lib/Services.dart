@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hp_assistant/Activities/Activities.dart';
 import 'package:hp_assistant/Diet/Diet.dart';
 
+import 'PredicitionModel.dart';
+
 class Services extends StatefulWidget {
   @override
   _ServicesState createState() => _ServicesState();
@@ -76,6 +78,49 @@ class _ServicesState extends State<Services> {
                 ),
                 color: Colors.teal.shade600,
                 textColor: Colors.white,),
+
+              new Padding(padding: EdgeInsets.all(15.0)),
+
+              new RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                onPressed: () {
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(
+                        builder: (BuildContext context) => new PredictionModel(),
+                      )
+                  );
+                },
+                child: Text(
+                  "Get Predictions",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                color: Colors.teal.shade600,
+                textColor: Colors.white,),
+
+              new Padding(padding: EdgeInsets.all(15.0)),
+              
+              new RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                onPressed: () {
+
+                },
+                child: Text(
+                  "My Health Record",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                color: Colors.teal.shade600,
+                textColor: Colors.white,),
+
             ],
           ),
         ),

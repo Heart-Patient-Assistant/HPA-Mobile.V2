@@ -4,6 +4,8 @@ import 'package:hp_assistant/DocorInfo.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/PatientInfo.dart';
 import 'package:hp_assistant/databasehelpler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -14,6 +16,28 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  read() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.get(key ) ?? 0;
+    if(value != '0'){
+      if (this.typeUser.contains('DOCTOR') ){
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => DoctorInfo()),
+          ModalRoute.withName('/DoctorInfo'),
+        ); }
+      else if( this.typeUser.contains('PATIENT')){
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => PatientInfo()),
+          ModalRoute.withName('/PatientInfo'),
+        );
+      }
+    }
+  }
   DatabaseHelper databaseHelper = new DatabaseHelper();
   // String msgStatus = '';
   String typeUser = 'Please select your type';
