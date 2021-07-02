@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/About.dart';
+import 'package:hp_assistant/Activities/Activities.dart';
 import 'package:hp_assistant/Blog.dart';
 import 'package:hp_assistant/Contact.dart';
+import 'package:hp_assistant/Diet/Breakfast.dart';
+import 'package:hp_assistant/Diet/Diet.dart';
+import 'package:hp_assistant/Diet/Dinner.dart';
+import 'package:hp_assistant/Diet/Lunch.dart';
 import 'package:hp_assistant/DocorInfo.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/EditDoctorProfile.dart';
@@ -52,6 +57,14 @@ class MyApp extends StatelessWidget {
         '/EditDoctorProfile': (BuildContext context) => new EditDoctorProfile(),
         '/EditPassword': (BuildContext context) => new EditPassword(),
         '/FB': (BuildContext context) => new FB(),
+        '/Diet': (BuildContext context) => new Diet(),
+        '/Activities': (BuildContext context) => new Activities(),
+        '/Breakfast': (BuildContext context) => new Breakfast(),
+        '/Dinner': (BuildContext context) => new Dinner(),
+        '/Lunch': (BuildContext context) => new Lunch(),
+
+
+
 
 
 

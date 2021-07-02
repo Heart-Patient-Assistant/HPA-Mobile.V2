@@ -38,7 +38,7 @@ class _ContactState extends State<Contact> {
 
       body:
       new  ListView(children: [
-
+        new Padding(padding: EdgeInsets.all(15.0)),
           ContactUs(
             logo: AssetImage('img/heart.jpg'),
             email: 'adoshi26.ad@gmail.com',
@@ -54,6 +54,7 @@ class _ContactState extends State<Contact> {
           ),
 
         new  Column(children: [
+          new Padding(padding: EdgeInsets.all(15.0)),
           new RaisedButton(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 onPressed: () {
@@ -70,9 +71,11 @@ class _ContactState extends State<Contact> {
                 color: Colors.teal.shade600,
                 textColor: Colors.white,
               ),
+          new Padding(padding: EdgeInsets.all(15.0)),
 
 
-         ],),
+
+        ],),
 
       ],),
 
