@@ -31,7 +31,7 @@ class _ServicesState extends State<Services> {
                 height: 200.0,
                 width: 350.0,
               ),
-              
+
               new Padding(padding: EdgeInsets.all(25.0)),
 
               new RaisedButton(

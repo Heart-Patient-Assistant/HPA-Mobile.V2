@@ -2,6 +2,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+bool type ;
+
 class DatabaseHelper{
   var status ;
   var token ;
@@ -26,6 +29,8 @@ class DatabaseHelper{
       throw Exception('Failed to register');
     }
   }
+
+
   Future<Login>loginData(String email , String password) async{
     final response = await  http.post(Uri.parse("https://mahdy.pythonanywhere.com/api/users/signin/"),
         headers: <String, String>{
@@ -35,8 +40,22 @@ class DatabaseHelper{
           "username": "$email",
           "password" : "$password"
         } )) ;
+
     print(response.statusCode);
+    print(response.body.contains("DOCTOR"));
+    print(response.body);
+
     var data = json.decode(response.body);
+
+    if(response.body.contains('DOCTOR')){
+      type = true;
+
+    }else if(response.body.contains('PATIENT')){
+     type = false ;
+    }
+
+    print ('in dbh ${type}');
+
     if(status = response.body.contains('non_field_errors')){
       print('data : ${data["non_field_errors"]}');
     }
@@ -45,6 +64,9 @@ class DatabaseHelper{
       _save(data["token"]);
     }
    }
+
+
+
   Future<AddDoctor> addDoctorData(String birthDate , String location ) async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';

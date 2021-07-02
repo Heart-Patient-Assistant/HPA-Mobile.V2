@@ -66,6 +66,7 @@ flutter:
     - img/Icon0.png
     - img/doctorIcon2.jpg
     - img/diet.axd.webp
+    - img/activity.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

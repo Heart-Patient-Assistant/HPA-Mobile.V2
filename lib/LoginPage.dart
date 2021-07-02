@@ -135,19 +135,30 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         );
                       });
-                } else {
+                } else if(type = false) {
                   setState(() {
                     _futureLogin = databaseHelper.loginData(
                         _emailController.text.trim().toLowerCase(),
                         _passwordController.text.trim());
                   });
-
-                    Navigator.pushAndRemoveUntil(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => HomePage()),
-                    ModalRoute.withName('/HomePage'),
-                  );
+                        builder: (BuildContext context) => PatientProfile()),
+                    ModalRoute.withName('/PatientProfile'),);
+                  print('login : ${type}');
+                }else if (type = true) {
+                  setState(() {
+                    _futureLogin = databaseHelper.loginData(
+                        _emailController.text.trim().toLowerCase(),
+                        _passwordController.text.trim());
+                  });
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => DoctorProfile()),
+                    ModalRoute.withName('/DoctorProfile'),);
+                  print('login : ${type}');
                 }
               },
               child: Text(

@@ -18,8 +18,22 @@ class _ActivitiesState extends State<Activities> {
         ),
         backgroundColor: Colors.teal.shade600,
       ),
-      body: new Container(
-
+      body:Container(
+        child: Column(
+          children: [
+            new Padding(padding: EdgeInsets.all(25.0)),
+            new Image.asset(
+              'img/activity.jpg',
+              height: 300.0,
+              width: 600.0,
+            ),
+            new Text("Three Kinds of Exercise That Boost Heart Health",style: TextStyle(
+                fontSize: 22,
+                fontFamily: 'Raleway',
+                fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
 
