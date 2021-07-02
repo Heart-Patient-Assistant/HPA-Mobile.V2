@@ -67,6 +67,15 @@ flutter:
     - img/doctorIcon2.jpg
     - img/diet.axd.webp
     - img/activity.jpg
+    - img/meal7.png
+    - img/meal1.png
+    - img/meal4.png
+    - img/meal6.png
+    - img/meal8.png
+    - img/meal5.png
+    - img/meal2.png
+    - img/meal3.png
+    - img/meal9.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

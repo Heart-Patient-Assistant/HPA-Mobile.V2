@@ -216,33 +216,6 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
             new Padding(padding: EdgeInsets.all(40.0)),
 
-        new Container(margin: EdgeInsets.only(left: 98, right: 98),
-            height: 48,
-          child:
-          new RaisedButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30)),
-            onPressed: (){
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => PredictionModel()),
-                ModalRoute.withName('/Prediction'),
-              );
-            },
-            color: Colors.teal.shade600,
-            child: new Text(
-              'Get prediction',
-              style: TextStyle(
-                fontSize: 24,
-                fontFamily: 'Raleway',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            textColor: Colors.white,
-
-          ),
-        )
 
 
           ],

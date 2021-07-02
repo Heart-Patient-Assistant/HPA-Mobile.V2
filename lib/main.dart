@@ -3,10 +3,19 @@ import 'package:hp_assistant/About.dart';
 import 'package:hp_assistant/Activities/Activities.dart';
 import 'package:hp_assistant/Blog.dart';
 import 'package:hp_assistant/Contact.dart';
-import 'package:hp_assistant/Diet/Breakfast.dart';
+import 'package:hp_assistant/Diet/Breakfast/Breakfast.dart';
+import 'package:hp_assistant/Diet/Breakfast/Meal1.dart';
+import 'package:hp_assistant/Diet/Breakfast/Meal2.dart';
+import 'package:hp_assistant/Diet/Breakfast/Meal3.dart';
 import 'package:hp_assistant/Diet/Diet.dart';
-import 'package:hp_assistant/Diet/Dinner.dart';
-import 'package:hp_assistant/Diet/Lunch.dart';
+import 'package:hp_assistant/Diet/Dinner/Dinner.dart';
+import 'package:hp_assistant/Diet/Dinner/Meal7.dart';
+import 'package:hp_assistant/Diet/Dinner/Meal8.dart';
+import 'package:hp_assistant/Diet/Dinner/Meal9.dart';
+import 'package:hp_assistant/Diet/Lunch/Lunch.dart';
+import 'package:hp_assistant/Diet/Lunch/Meal4.dart';
+import 'package:hp_assistant/Diet/Lunch/Meal5.dart';
+import 'package:hp_assistant/Diet/Lunch/Meal6.dart';
 import 'package:hp_assistant/DocorInfo.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/EditDoctorProfile.dart';
@@ -62,6 +71,15 @@ class MyApp extends StatelessWidget {
         '/Breakfast': (BuildContext context) => new Breakfast(),
         '/Dinner': (BuildContext context) => new Dinner(),
         '/Lunch': (BuildContext context) => new Lunch(),
+        '/Meal1': (BuildContext context) => new Meal1(),
+        '/Meal2': (BuildContext context) => new Meal2(),
+        '/Meal3': (BuildContext context) => new Meal3(),
+        '/Meal4': (BuildContext context) => new Meal4(),
+        '/Meal5': (BuildContext context) => new Meal5(),
+        '/Meal6': (BuildContext context) => new Meal6(),
+        '/Meal7': (BuildContext context) => new Meal7(),
+        '/Meal8': (BuildContext context) => new Meal8(),
+        '/Meal9': (BuildContext context) => new Meal9(),
 
 
 
