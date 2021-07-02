@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
@@ -16,9 +14,7 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-
   int _key;
-
 
   _save(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -27,18 +23,9 @@ class _MenuState extends State<Menu> {
     prefs.setString(key, value);
   }
 
-
-  _collapse() {
-    int newKey;
-    do {
-      _key = new Random().nextInt(10000);
-    } while (newKey == _key);
-  }
-
   @override
   void initState() {
     super.initState();
-    _collapse();
   }
   @override
   Widget build(BuildContext context) {
@@ -155,79 +142,22 @@ class _MenuState extends State<Menu> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              // new FlatButton.icon(
-              //   height: 80,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(30)),
-              //   onPressed: () {
-              //     Navigator.of(context).pushNamed('/Contact');
-              //   },
-              //   icon: Icon(Icons.send_rounded),
-              //   label: Text(
-              //     'C o n t a c t ',
-              //     style: TextStyle(
-              //         fontSize: 22,
-              //         fontFamily: 'Raleway',
-              //         fontWeight: FontWeight.bold),
-              //   ),
-              // ),
-
-
-              Stack(
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(top: 17.0,left: 115),
-                    child:Icon(Icons.send_rounded),
-                  ),
-                  Container(
-                     padding: EdgeInsets.only(left: 28),
-
-                    margin: EdgeInsets.only(right: 55,left: 100),
-                    child: ExpansionTile(
-                      key: new Key(_key.toString()),
-                      initiallyExpanded: false,
-                      title: new Text('C o n t a c t ',
-                        style: TextStyle(
-                            fontSize: 22,
-                            fontFamily: 'Raleway',
-                            fontWeight: FontWeight.bold),),
-                      children: [
-                        new ListTile(
-                          title: const Text(
-                            'Contact with us',
-                            style: TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.bold),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).pushNamed('/Contact');
-
-                            _collapse();
-
-                          },
-                        ),
-                        new ListTile(
-                          title: const Text(
-                            'Feedback',
-                            style: TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.bold),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).pushNamed('/FB');
-
-                            _collapse();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              new FlatButton.icon(
+                height: 80,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/Contact');
+                },
+                icon: Icon(Icons.send_rounded),
+                label: Text(
+                  'C o n t a c t ',
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-
-
-
-
 
               Stack(
                 children: [
@@ -258,9 +188,6 @@ class _MenuState extends State<Menu> {
                           ),
                           onTap: () {
                             Navigator.of(context).pushNamed('/EditPatientProfile');
-
-                            _collapse();
-
                           },
                         ),
                         new ListTile(
@@ -272,8 +199,6 @@ class _MenuState extends State<Menu> {
                           ),
                           onTap: () {
                             Navigator.of(context).pushNamed('/EditPassword');
-
-                            _collapse();
                           },
                         ),
                       ],
@@ -283,7 +208,7 @@ class _MenuState extends State<Menu> {
               ),
 
 
-
+              //
               // new FlatButton.icon(
               //   height: 80,
               //   shape: RoundedRectangleBorder(
@@ -327,47 +252,54 @@ class _MenuState extends State<Menu> {
   }
 }
 
-// new ListTile(
-// title: const Text(
-// 'Services',
-// style: TextStyle(fontSize: 20,
-// fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+// Stack(
+// children: [
+// Container(
+// padding: EdgeInsets.only(top: 17.0,left: 115),
+// child:Icon(Icons.send_rounded),
 // ),
-// //        onTap:
-// ),
-// new ListTile(
-// title: const Text(
-// 'About',
-// style: TextStyle(fontSize: 20,
-// fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+// Container(
+// padding: EdgeInsets.only(left: 28),
 //
-// ),
-// //        onTap:
-// ),
-// new Padding(padding: EdgeInsets.only(right:50,top: 10.0)),
+// margin: EdgeInsets.only(right: 55,left: 100),
+// child: ExpansionTile(
+// key: new Key(_key.toString()),
+// initiallyExpanded: false,
+// title: new Text('C o n t a c t ',
+// style: TextStyle(
+// fontSize: 22,
+// fontFamily: 'Raleway',
+// fontWeight: FontWeight.bold),),
+// children: [
 // new ListTile(
 // title: const Text(
-// 'Contact',
-// style: TextStyle(fontSize: 20,
-// fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+// 'Contact with us',
+// style: TextStyle(
+// fontFamily: 'Raleway',
+// fontWeight: FontWeight.bold),
 // ),
-// //        onTap:
+// onTap: () {
+// Navigator.of(context).pushNamed('/Contact');
+//
+// _collapse();
+//
+// },
 // ),
-// new Padding(padding: EdgeInsets.only(right:50,top: 10.0)),
 // new ListTile(
 // title: const Text(
-// 'Settings',
-// style: TextStyle(fontSize: 20,
-// fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+// 'Feedback',
+// style: TextStyle(
+// fontFamily: 'Raleway',
+// fontWeight: FontWeight.bold),
 // ),
-// //        onTap:
+// onTap: () {
+// Navigator.of(context).pushNamed('/FB');
+//
+// _collapse();
+// },
 // ),
-// new Padding(padding: EdgeInsets.only(right:50,top: 10.0)),
-// new ListTile(
-// title: const Text(
-// 'Log out',
-// style: TextStyle(fontSize: 20,
-// fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+// ],
 // ),
-// //        onTap:
+// ),
+// ],
 // ),
