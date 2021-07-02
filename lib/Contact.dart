@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:hp_assistant/Menu.dart';
-import 'databasehelpler.dart';
+import 'package:contactus/contactus.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+
 class Contact extends StatefulWidget {
   Contact({Key key}) : super(key: key);
   @override
@@ -11,38 +12,19 @@ class Contact extends StatefulWidget {
 
 class _ContactState extends State<Contact> {
 
-  DatabaseHelper databaseHelper = new DatabaseHelper();
-  String rate='';
-  int radioGroup = 0;
-  String feedbackCategory='';
-
-  final TextEditingController _textController = new TextEditingController();
-
-  void radioEventHandler(int value) {
+  void _onItemTapped(int index) {
     setState(() {
-      radioGroup = value;
-      if (radioGroup ==1){
-        setState(() {
-          this.feedbackCategory = 'suggest';
-          print(this.feedbackCategory);
-        });}
-      else if (radioGroup ==2){
-        setState(() {
-          this.feedbackCategory = 'complain';
-          print(this.feedbackCategory);
-
-        });}
-      else if (radioGroup ==3){
-        setState(() {
-          this.feedbackCategory = 'complement';
-          print(this.feedbackCategory);
-
-        });}
+      Navigator.of(context).pushNamed('/FB');
     });
   }
+
+
+
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
+
       appBar: AppBar(
         title: Text(
           'Contact Page',
@@ -53,193 +35,32 @@ class _ContactState extends State<Contact> {
         ),
         backgroundColor: Colors.teal.shade600,
       ) ,
-        body:  new Column(
-            children: [
 
-              new Padding(padding: EdgeInsets.only(top: 20.0)),
+      body:
+      new  ListView(children: [
 
-              new Text('My Feedback',
-                style: TextStyle(
-                    fontSize: 22,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal.shade600
-                ),
-              ),
+          ContactUs(
+            logo: AssetImage('img/heart.jpg'),
+            email: 'adoshi26.ad@gmail.com',
+            companyName: 'HPA',
+            companyColor: Colors.teal.shade100,
+            phoneNumber: '',
+            website: 'http://mahdy.pythonanywhere.com/',
+            githubUserName: 'https://github.com/Heart-Patient-Assistant/HPA-Web/tree/codeTest',
+            linkedinURL: '',
+            twitterHandle: '',
+             instagram: '',
+             facebookHandle: '',
+          ),
 
-              new Padding(padding: EdgeInsets.only(top: 20.0)),
-              new Row(
-                children: [
-
-                  new Container(
-                    alignment: Alignment.topLeft,
-                    child: new Text('Rating:   ',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.teal.shade600,
-                      ),
-                    ),),
-
-                  new Container(
-                    child: new RatingBar.builder(
-                      initialRating: 0.0,
-                      minRating: 0.0,
-                      direction: Axis.horizontal,
-                      allowHalfRating: false,
-                      itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber,),
-                      onRatingUpdate: (rating) {
-
-                        if (rating ==1.0){
-                          setState(() {
-                            this.rate='verybad';
-                            print(this.rate);
-
-                          });}
-                        else if (rating == 2.0){
-                          setState(() {
-                            this.rate='notbad';
-                            print(this.rate);
-
-                          });}
-                        else if (rating == 3.0){
-                          setState(() {
-                            this.rate='good';
-                            print(this.rate);
-
-                          });}
-                        else if (rating == 4.0){
-                          setState(() {
-                            this.rate ='verygood';
-                            print(this.rate);
-
-                          });
-                          return this.rate ='excellent';}
-                        else if (rating == 5.0){
-                          setState(() {
-                            this.rate='excellent';
-                            print(this.rate);
-
-                          });}
-                      },
-
-                    ) ,
-                  ),
-                ],
-              ),
-
-              new Padding(padding: EdgeInsets.only(top: 19.0)),
-
-              new TextField(
-                keyboardType: TextInputType.multiline,
-                maxLines: 5,
-                controller: _textController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(40)),
-                  labelText: 'Please Write Your Comment',
-                  hintMaxLines:100,
-                ),
-              ),
-
-              new Padding(padding: EdgeInsets.only(top: 20.0)),
-
-              new Container(
-                alignment: Alignment.topLeft,
-                child: new Text('Choose Category',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal.shade600,
-                  ),
-                ),),
-
-              new Row(
-                children: [
-                  new Radio(
-                    value: 1,
-                    groupValue: radioGroup,
-                    onChanged: radioEventHandler,
-                  ),
-                  new Text("suggest"),
-                  new Padding(padding: EdgeInsets.only(right:15.0)),
-                  new Radio(
-                    value: 2,
-                    groupValue: radioGroup,
-                    onChanged: radioEventHandler,
-                  ),
-                  new Text("complain"),
-                  new Padding(padding: EdgeInsets.only(right:15.0)),
-                  new Radio(
-                    value: 3,
-                    groupValue: radioGroup,
-                    onChanged: radioEventHandler,
-                  ),
-                  new Text("complement"),
-                ],
-              ),
-
-              new Padding(padding: EdgeInsets.only(top: 10.0)),
-
-              new RaisedButton(
+        new  Column(children: [
+          new RaisedButton(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 onPressed: () {
-                  if (_textController.text.trim().isEmpty || rate==''|| radioGroup ==0 ){
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: new Text('Complete The Feedback', style: TextStyle(color: Colors.teal.shade600),),
-                            content: Text("Please Insert your Feedback "),
-                            actions: [
-                              FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: new Text(
-                                    'Ok',
-                                    style: TextStyle(color: Colors.blue),
-                                  ))
-                            ],
-                          );
-                        });
-                  }else {
-                    print(_textController);
-                    setState(() {
-                      databaseHelper.FbData(
-                          this.rate.trim(),
-                          this.feedbackCategory.trim(),
-                          _textController.text.trim());
-                    });
-
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: new Text('thank you', style: TextStyle(color: Colors.blue),),
-                            content: Text("We received your Feedback "),
-                            actions: [
-                              FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: new Text(
-                                    'Ok',
-                                    style: TextStyle(color: Colors.blue),
-                                  ))
-                            ],
-                          );
-                        });
-
-                  }
+                  Navigator.of(context).pushNamed('/FB');
                 },
                 child: Text(
-                  "Send",
+                  "Feedback",
                   style: TextStyle(
                     fontSize: 24,
                     fontFamily: 'Raleway',
@@ -251,11 +72,11 @@ class _ContactState extends State<Contact> {
               ),
 
 
+         ],),
+
+      ],),
 
 
-
-            ]
-        )
     );
   }
 }
