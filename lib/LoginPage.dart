@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                new Padding(padding: EdgeInsets.only(top: h * 0.03)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.05)),
                 new Container(
                   margin: EdgeInsets.only(left: w * 0.3, right: w * 0.3),
                   height:  h * 0.05,
@@ -126,11 +126,11 @@ class _LoginPageState extends State<LoginPage> {
                             builder: (context) {
                               return AlertDialog(
                                 title: new Text(
-                                  'Complete',
+                                  'ERROR',
                                   style: TextStyle(color: Colors.blue),
                                 ),
                                 content: Text(
-                                    "Please input your email and password"),
+                                    "Please input your email and password."),
                                 actions: [
                                   FlatButton(
                                       onPressed: () {
@@ -214,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                     textColor: Colors.white,
                   ),
                 ),
-                new Padding(padding: EdgeInsets.only(top: h * 0.05)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.07)),
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -228,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                     new FlatButton(
                         onPressed: _register,
                         child: new Text(
-                          "Create account",
+                          "Sign up",
                           style: TextStyle(
                             fontSize: w * 0.04,
                             fontFamily: 'Raleway',

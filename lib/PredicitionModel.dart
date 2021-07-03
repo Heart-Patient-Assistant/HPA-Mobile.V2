@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 
 class PredictionModel extends StatefulWidget {
+
   @override
   _PredictionModelState createState() => _PredictionModelState();
 }
@@ -12,9 +13,17 @@ class PredictionModel extends StatefulWidget {
 class _PredictionModelState extends State<PredictionModel> {
 
   var status ;
+  int radioGroup = 2;
+
+
+  void radioEventHandler(int value) {
+    setState(() {
+      radioGroup = value;
+    });
+  }
 
   TextEditingController age = TextEditingController();
-  TextEditingController sex = TextEditingController();
+  // TextEditingController sex = TextEditingController();
   TextEditingController cp = TextEditingController();
   TextEditingController trestbps = TextEditingController();
   TextEditingController chol = TextEditingController();
@@ -28,10 +37,12 @@ class _PredictionModelState extends State<PredictionModel> {
   TextEditingController thal = TextEditingController();
 
 
+
+
   Future Predict( ) async {
 
     int varAge =int.parse(age.text);
-    int varSex =int.parse(sex.text);
+    // int varSex =int.parse(sex.text);
     int varCp =int.parse(cp.text);
     int varTrestbps =int.parse(trestbps.text);
     int varChol =int.parse(chol.text);
@@ -43,6 +54,12 @@ class _PredictionModelState extends State<PredictionModel> {
     int varSlope =int.parse(slope.text);
     int varCa =int.parse(ca.text);
     int varThal =int.parse(thal.text);
+    int variableSex ;
+    if (radioGroup==0) {
+      variableSex = 0;
+    }else if (radioGroup ==1){
+     variableSex = 1;
+    }
 
 
 
@@ -50,7 +67,7 @@ class _PredictionModelState extends State<PredictionModel> {
         "https://mahdy.pythonanywhere.com//services/getpredictionapi/"),
         body: {
           'age': "$varAge",
-          'sex': "$varSex",
+          'sex': "$variableSex",
           'cp': "$varCp",
           'trestbps': "$varTrestbps",
           'chol': "$varChol",
@@ -109,17 +126,19 @@ class _PredictionModelState extends State<PredictionModel> {
             new Padding(
               padding: new EdgeInsets.only(top: 10.0),
             ),
-            Container(
-              height: 50,
-              child: new TextFormField(
-                controller: sex,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Sex',
-                  icon: new Icon(Icons.circle),
-                ),
-              ),
-            ),
+            // Container(
+            //   height: 50,
+            //   child: new TextFormField(
+            //     controller: sex,
+            //     keyboardType: TextInputType.number,
+            //     decoration: InputDecoration(
+            //       labelText: 'Sex',
+            //       // hintText: 'Male = 1 ..... Female = 0',
+            //
+            //       icon: new Icon(Icons.circle),
+            //     ),
+            //   ),
+            // ),
             new Padding(
               padding: new EdgeInsets.only(top: 10.0),
             ),
@@ -283,6 +302,27 @@ class _PredictionModelState extends State<PredictionModel> {
             ),
 
             new Padding(padding: EdgeInsets.all(10.0)),
+            new Container(
+                margin: EdgeInsets.only(left: 60.0),
+                child: new Row(
+                  children: [
+                    new Radio(
+                      value: 1,
+                      groupValue: radioGroup,
+                      onChanged: radioEventHandler,
+                    ),
+                    new Text("Male"),
+                    new Padding(padding: EdgeInsets.only(right:15.0)),
+                    new Radio(
+                      value: 0,
+                      groupValue: radioGroup,
+                      onChanged: radioEventHandler,
+                    ),
+                    new Text("Female"),
+                  ],
+                )),
+            new Padding(padding: EdgeInsets.all(5.0)),
+
 
             new RaisedButton(
               shape: RoundedRectangleBorder(
@@ -300,7 +340,7 @@ class _PredictionModelState extends State<PredictionModel> {
               ),
               color: Colors.teal.shade600,
               textColor: Colors.white,),
-            new Padding(padding: EdgeInsets.all(10.0)),
+            new Padding(padding: EdgeInsets.all(15.0)),
 
           ],
         ),
