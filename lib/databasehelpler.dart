@@ -1,12 +1,14 @@
+import 'package:hp_assistant/newPost.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String type;
+String token= "0";
 
 class DatabaseHelper {
   var status;
-  var token;
+
 
   Future<Register> registerData(String email, String firstName, String lastName,
       String password, String password2, String type) async {
@@ -48,6 +50,10 @@ class DatabaseHelper {
     print(response.body);
 
     var data = json.decode(response.body);
+    token = data["token"];
+    print('data : ${data["token"]}' );
+    print('token: $token');
+
 
     if (response.body.contains('DOCTOR')) {
       type = 'DOCTOR';
@@ -66,11 +72,26 @@ class DatabaseHelper {
       print('data : ${data["non_field_errors"]}');
     } else {
       print('data : ${data["token"]}');
-      _save(data["token"]);
+      //_save(data["token"]);
     }
   }
 
+  Future<newPost> newPostData (String title, String body) async {
+    print(token);
+    final response = await http.post(
+        Uri.parse("https://mahdy.pythonanywhere.com/api/blog/create/"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          "Authorization": "Token $token",
+        },
+        body: jsonEncode(<String, String>{
+          "title": "$title",
+          "body": "$body",
+        }));
+    print(response.statusCode);
+    print(response.body);
 
+  }
 
   Future<AddDoctor> addDoctorData(String birthDate, String location) async {
     final prefs = await SharedPreferences.getInstance();
@@ -281,6 +302,22 @@ class AddPatient {
     return AddPatient(
       location: json['location'],
       birthDate: json['birthDate'],
+    );
+  }
+}
+class newPost {
+  final String title;
+  final String body;
+
+
+  newPost({
+        this.title,
+        this.body,
+  });
+  factory newPost.fromJson(Map<String, dynamic> json) {
+    return newPost(
+      title: json['title'],
+      body: json['body'],
     );
   }
 }

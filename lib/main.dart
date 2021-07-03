@@ -33,6 +33,7 @@ import 'package:hp_assistant/Services.dart';
 import 'package:hp_assistant/Settings.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
 import 'package:hp_assistant/FB.dart';
+import 'package:hp_assistant/newPost.dart';
 
 
 void main() {
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
         '/Meal7': (BuildContext context) => new Meal7(),
         '/Meal8': (BuildContext context) => new Meal8(),
         '/Meal9': (BuildContext context) => new Meal9(),
+        '/newPost': (BuildContext context) => new newPost(),
 
 
 
