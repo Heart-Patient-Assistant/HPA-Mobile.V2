@@ -141,7 +141,7 @@ class _MenuState extends State<Menu> {
                 },
                 icon: Icon(Icons.contact_support_rounded),
                 label: Text(
-                  'A b o u t       ',
+                  'A b o u t  U s      ',
                   style: TextStyle(
                       fontSize: 22,
                       fontFamily: 'Raleway',
