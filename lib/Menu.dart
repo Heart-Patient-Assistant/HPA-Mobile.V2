@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
+import 'package:hp_assistant/PatientProfile.dart';
 import 'package:hp_assistant/EditDoctorProfile.dart';
 import 'package:hp_assistant/EditPassword.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/LoginPage.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 class Menu extends StatefulWidget {
   @override
@@ -15,6 +18,9 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   int _key;
+
+  bool _type;
+
 
   _save(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -52,8 +58,8 @@ class _MenuState extends State<Menu> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => DoctorProfile()),
-                  ModalRoute.withName('/DoctorProfile'),
+                      builder: (BuildContext context) => PatientProfile()),
+                  ModalRoute.withName('/PatientProfile'),
                 );
               },
               icon: Icon(

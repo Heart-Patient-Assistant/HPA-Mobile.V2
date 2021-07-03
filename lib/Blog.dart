@@ -3,6 +3,8 @@ import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/Menu.dart';
 
+import 'PatientProfile.dart';
+
 class Blog extends StatefulWidget {
   @override
   _BlogState createState() => _BlogState();
@@ -32,8 +34,8 @@ class _BlogState extends State<Blog> {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => DoctorProfile()),
-                ModalRoute.withName('/DoctorProfile'),
+                    builder: (BuildContext context) => PatientProfile()),
+                ModalRoute.withName('/PatientProfile'),
               );
             },
             icon: Icon(Icons.account_circle_rounded,),

@@ -53,7 +53,7 @@ class _FBState extends State<FB> {
           ),
           backgroundColor: Colors.teal.shade600,
         ) ,
-        body:  Center(
+        body: ListView ( children:[ Center(
           child: new Column(
               children: [
                 new Padding(padding: EdgeInsets.all( 20.0)),
@@ -236,6 +236,7 @@ class _FBState extends State<FB> {
 
               ]),
         )
+        ]),
     );
   }
 }

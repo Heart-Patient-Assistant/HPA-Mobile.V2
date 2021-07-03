@@ -65,6 +65,8 @@ class DatabaseHelper {
     }
   }
 
+
+
   Future<AddDoctor> addDoctorData(String birthDate, String location) async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';

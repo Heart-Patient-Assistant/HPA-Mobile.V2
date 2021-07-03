@@ -4,6 +4,8 @@ import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/Menu.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
 
+import 'PatientProfile.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,8 +29,8 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => DoctorProfile()),
-                  ModalRoute.withName('/DoctorProfile'),
+                      builder: (BuildContext context) => PatientProfile()),
+                  ModalRoute.withName('/PatientProfile'),
                 );
               },
               icon: Icon(Icons.account_circle_rounded,),

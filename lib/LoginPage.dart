@@ -40,42 +40,44 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // double h = MediaQuery.of(context).size.height;
-    // double w = MediaQuery.of(context).size.width;
+     double h = MediaQuery.of(context).size.height;
+     double w = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: (_futureLogin == null)
           ? new ListView(
               children: [
-                new Padding(padding: EdgeInsets.only(top: 13)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.05)),
                 new Container(
                   alignment: Alignment.centerLeft,
                   margin: EdgeInsets.only(
-                    left: 10.5,
+                    left: w * 0.1,
+                    top: h * 0.0,
+                    right: w * 0.1,
                   ),
                   child: Text(
                     "Heart Patient Assistant",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.teal.shade600,
-                        fontSize: 30.0,
+                        fontSize: w * 0.07,
                         fontFamily: 'Raleway',
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                new Padding(padding: EdgeInsets.only(top: 100)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.07)),
                 new Container(
                   alignment: Alignment.center,
                   child: new Image.asset(
                     'img/heart.jpg',
-                    height: 150.0,
-                    width: 500.0,
+                    height: h * 0.2,
+                    width: w,
                   ),
                 ),
-                new Padding(padding: EdgeInsets.only(top: 50)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.08)),
                 new Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 22, right: 22),
+                  margin: EdgeInsets.only(left: w * 0.05, right: w * 0.05),
                   child: new TextField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -88,9 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                new Padding(padding: EdgeInsets.only(top: 15)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.02)),
                 new Container(
-                  margin: EdgeInsets.only(left: 22, right: 22),
+                  margin: EdgeInsets.only(left: w * 0.05, right: w * 0.05),
                   child: new TextField(
                     controller: _passwordController,
                     keyboardType: TextInputType.text,
@@ -104,10 +106,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                new Padding(padding: EdgeInsets.only(top: 30.0)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.03)),
                 new Container(
-                  margin: EdgeInsets.only(left: 73, right: 73),
-                  height: 48,
+                  margin: EdgeInsets.only(left: w * 0.3, right: w * 0.3),
+                  height:  h * 0.05,
                   child: new RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
@@ -155,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       "Login",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: w * 0.07,
                         fontFamily: 'Raleway',
                         fontWeight: FontWeight.bold,
                       ),
@@ -164,14 +166,14 @@ class _LoginPageState extends State<LoginPage> {
                     textColor: Colors.white,
                   ),
                 ),
-                new Padding(padding: EdgeInsets.only(top: 148.0)),
+                new Padding(padding: EdgeInsets.only(top: h * 0.05)),
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     new Text(
                       "Don't have an account ?",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: w * 0.04,
                         fontFamily: 'Raleway',
                       ),
                     ),
@@ -180,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: new Text(
                           "Create account",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: w * 0.04,
                             fontFamily: 'Raleway',
                             fontWeight: FontWeight.bold,
                             color: Colors.blue,
