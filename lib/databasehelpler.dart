@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-bool type;
+String type;
 
 class DatabaseHelper {
   var status;
@@ -34,7 +34,7 @@ class DatabaseHelper {
     }
   }
 
-  Future<bool> loginData(String email, String password) async {
+  Future<String> loginData(String email, String password) async {
     final response = await http.post(
         Uri.parse("https://mahdy.pythonanywhere.com/api/users/signin/"),
         headers: <String, String>{
@@ -50,9 +50,14 @@ class DatabaseHelper {
     var data = json.decode(response.body);
 
     if (response.body.contains('DOCTOR')) {
-      return  true;
+      type = 'DOCTOR';
+      return  type ;
     } else if (response.body.contains('PATIENT')) {
-      return false;
+      type = 'PATIENT';
+      return type;
+    }else if (response.body.contains("Unable to log in with provided credentials.")) {
+      type = 'NOTFOUND';
+      return type;
     }
 
     print('in dbh ${type}');

@@ -5,6 +5,11 @@ import 'package:hp_assistant/PatientProfile.dart';
 import 'package:hp_assistant/databasehelpler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'DoctorProfile.dart';
+import 'DoctorProfile.dart';
+import 'PatientProfile.dart';
+import 'PatientProfile.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
   @override
@@ -139,20 +144,63 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             });
                       } else {
-                        bool _type = await databaseHelper.loginData(
+                        String _type = await databaseHelper.loginData(
                             _emailController.text.trim().toLowerCase(),
                             _passwordController.text.trim());
+                        if (_type == 'DOCTOR'){
+                          Navigator.of(context).push(
+                              new MaterialPageRoute(
+                                builder: (BuildContext context) => new DoctorProfile(),
+                              )
+                          );
+                        } else if (_type == 'PATIENT'){
+                          Navigator.of(context).push(
+                              new MaterialPageRoute(
+                                builder: (BuildContext context) => new PatientProfile(),
+                              )
+                          );
+                        } else if (_type == 'NOTFOUND'){
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: new Text(
+                                    'ERROR',
+                                    style: TextStyle(color: Colors.blue),
+                                  ),
+                                  content: Text(
+                                      "Unable to log in with provided credentials....Please check your data and try again."),
+                                  actions: [
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              new MaterialPageRoute(
+                                                builder: (BuildContext context) => new LoginPage(),
+                                              )
+                                          );
+                                        },
+                                        child: new Text(
+                                          'Ok',
+                                          style: TextStyle(color: Colors.blue),
+                                        ))
+                                  ],
+                                );
+                              });
 
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  _type ? DoctorProfile() : PatientProfile()),
-                          ModalRoute.withName(_type == false
-                              ? '/PatientProfile'
-                              : '/DoctorProfile'),
-                        );
+                        }
+
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (BuildContext context) =>
+                        //           _type ? DoctorProfile() : PatientProfile()),
+                        //   ModalRoute.withName(_type == false
+                        //       ? '/PatientProfile'
+                        //       : '/DoctorProfile'),
+                        // );
+
                       }
+
                     },
                     child: Text(
                       "Login",
