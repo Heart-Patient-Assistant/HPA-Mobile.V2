@@ -17,6 +17,8 @@ class _PatientProfileState extends State<PatientProfile> {
   PickedFile _imageFile;
   final ImagePicker picker = ImagePicker();
   String _imagePath;
+  List post_data;
+
 
   @override
   void initState() {

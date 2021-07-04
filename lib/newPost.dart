@@ -116,17 +116,17 @@ class _newPostState extends State<newPost> {
             });
 
 
-            // showDialog(
-            //     context: context,
-            //     builder: (context) {
-            //       return AlertDialog(
-            //         title: new Text('thank you', style: TextStyle(color: Colors.blue),),
-            //         content: Text("post will sent"),
-            //         actions: [
-            //           FlatButton(
-            //               onPressed: () {Navigator.pop(context);},
-            //               child: new Text('Ok', style: TextStyle(color: Colors.blue),))
-            //         ],);});
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: new Text('Done', style: TextStyle(color: Colors.teal.shade600),),
+                    content: Text("post will sent"),
+                    actions: [
+                      FlatButton(
+                          onPressed: () {Navigator.pop(context);},
+                          child: new Text('Ok', style: TextStyle(color: Colors.teal.shade600),))
+                    ],);});
 
           }},
           child: Text("Post",

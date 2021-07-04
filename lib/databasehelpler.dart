@@ -10,8 +10,7 @@ class DatabaseHelper {
   var status;
 
 
-  Future<Register> registerData(String email, String firstName, String lastName,
-      String password, String password2, String type) async {
+  Future<Register> registerData(String email, String firstName, String lastName, String password, String password2, String type) async {
     final response = await http.post(
         Uri.parse("https://mahdy.pythonanywhere.com/api/users/signup/"),
         headers: <String, String>{
@@ -90,6 +89,60 @@ class DatabaseHelper {
         }));
     print(response.statusCode);
     print(response.body);
+
+  }
+
+
+  Future<List> getPostData () async {
+
+    final response = await http.get(
+        Uri.parse("https://mahdy.pythonanywhere.com/api/blog/"),
+        headers: <String, String>{
+          'Content-Type': "application/json; charset=UTF-8",
+          "Vary": "Accept",
+        },);
+
+
+    return json.decode(response.body) ;
+    print(response.statusCode);
+    print(response.body);
+
+  }
+
+  Future<Map> getDPostData (int id) async {
+
+    final response = await http.get(
+      Uri.parse("https://mahdy.pythonanywhere.com/api/blog/posts/$id/"),
+      headers: <String, String>{
+        'Content-Type': "application/json; charset=UTF-8",
+        "Vary": "Accept",
+      },);
+
+    print(response.statusCode);
+    print(response.body);
+
+   return json.decode(response.body) ;
+
+  }
+
+  Future<Map> createCommentData (int id) async {
+    final response = await http.post(
+        Uri.parse(
+            "https://mahdy.pythonanywhere.com/api/blog/posts/$id/comments/"),
+        headers: <String, String>{
+          'Content-Type': "application/json; charset=UTF-8",
+          "Authorization": "Token $token",
+          "Vary": "Accept",
+
+        },
+        body: jsonEncode(<String, String>{
+          "body": "body",
+        }));
+
+    print(response.statusCode);
+    print(response.body);
+
+    return json.decode(response.body) ;
 
   }
 
@@ -318,6 +371,35 @@ class newPost {
     return newPost(
       title: json['title'],
       body: json['body'],
+    );
+  }
+}
+
+class getPost {
+  final int id;
+  final String author;
+  final String title;
+  final String body;
+  final String post_date;
+  final String header_image;
+
+
+  getPost({
+    this.id,
+    this.author,
+    this.title,
+    this.body,
+    this.post_date,
+    this.header_image,
+  });
+  factory getPost.fromJson(Map<String, dynamic> json) {
+    return getPost(
+      id: json['id'],
+      author: json['author'],
+      title: json['title'],
+      body: json['body'],
+      post_date: json['post_date'],
+      header_image: json['header_image'],
     );
   }
 }
