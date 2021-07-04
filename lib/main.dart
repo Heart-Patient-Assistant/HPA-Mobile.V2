@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hp_assistant/About.dart';
 import 'package:hp_assistant/Activities/Activities.dart';
 import 'package:hp_assistant/Blog.dart';
+import 'package:hp_assistant/Blog2.dart';
 import 'package:hp_assistant/Contact.dart';
 import 'package:hp_assistant/Diet/Breakfast/Breakfast.dart';
 import 'package:hp_assistant/Diet/Breakfast/Meal1.dart';
@@ -21,8 +22,10 @@ import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/EditDoctorProfile.dart';
 import 'package:hp_assistant/EditPassword.dart';
 import 'package:hp_assistant/EditPatientProfile.dart';
+import 'package:hp_assistant/Home2.dart';
 import 'package:hp_assistant/LoginPage.dart';
 import 'package:hp_assistant/Menu.dart';
+import 'package:hp_assistant/Menu2.dart';
 import 'package:hp_assistant/PatientInfo.dart';
 import 'package:hp_assistant/PatientProfile.dart';
 import 'package:hp_assistant/PredicitionModel.dart';
@@ -82,6 +85,9 @@ class MyApp extends StatelessWidget {
         '/Meal8': (BuildContext context) => new Meal8(),
         '/Meal9': (BuildContext context) => new Meal9(),
         '/newPost': (BuildContext context) => new newPost(),
+        '/Blog2': (BuildContext context) => new Blog2(),
+        '/Home2': (BuildContext context) => new Home2(),
+        '/Menu2': (BuildContext context) => new Menu2(),
 
 
 

@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hp_assistant/Blog.dart';
-import 'package:hp_assistant/DoctorProfile.dart';
-import 'package:hp_assistant/PatientProfile.dart';
-import 'package:hp_assistant/EditDoctorProfile.dart';
-import 'package:hp_assistant/EditPassword.dart';
-import 'package:hp_assistant/HomePage.dart';
-import 'package:hp_assistant/LoginPage.dart';
-import 'package:hp_assistant/TipsForThePatient.dart';
+import 'package:hp_assistant/Blog2.dart';
+import 'package:hp_assistant/Home2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'DoctorProfile.dart';
+import 'LoginPage.dart';
 
+class Menu2 extends StatefulWidget {
 
-class Menu extends StatefulWidget {
   @override
-  _MenuState createState() => _MenuState();
+  _Menu2State createState() => _Menu2State();
 }
 
-class _MenuState extends State<Menu> {
+class _Menu2State extends State<Menu2> {
   int _key;
 
   bool _type;
@@ -33,67 +29,66 @@ class _MenuState extends State<Menu> {
   void initState() {
     super.initState();
   }
-  @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage()),
-                  ModalRoute.withName('/HomePage'),
-                );
-              },
-              icon: Icon(
-                Icons.home_rounded,
-              ),
+      appBar: AppBar(
+        actions: [
+          FlatButton.icon(
+            label: Text(''),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Home2()),
+                ModalRoute.withName('/Home2'),
+              );
+            },
+            icon: Icon(
+              Icons.home_rounded,
             ),
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => PatientProfile()),
-                  ModalRoute.withName('/PatientProfile'),
-                );
-              },
-              icon: Icon(
-                Icons.account_circle_rounded,
-              ),
+          ),
+          FlatButton.icon(
+            label: Text(''),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => DoctorProfile()),
+                ModalRoute.withName('/DoctorProfile'),
+              );
+            },
+            icon: Icon(
+              Icons.account_circle_rounded,
             ),
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext context) => Blog()),
-                  ModalRoute.withName('/Blog'),
-                );
-              },
-              icon: Icon(
-                Icons.add_comment_rounded,
-              ),
+          ),
+          FlatButton.icon(
+            label: Text(''),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) => Blog2()),
+                ModalRoute.withName('/Blog2'),
+              );
+            },
+            icon: Icon(
+              Icons.add_comment_rounded,
             ),
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: null,
-              icon: Icon(
-                Icons.menu_rounded,
-                color: Colors.teal.shade600,
-                size: 50,
-              ),
+          ),
+          FlatButton.icon(
+            label: Text(''),
+            onPressed: null,
+            icon: Icon(
+              Icons.menu_rounded,
+              color: Colors.teal.shade600,
+              size: 50,
             ),
-            new Padding(padding: EdgeInsets.only(right: 25.0)),
-          ],
-          backgroundColor: Colors.white,
-        ),
+          ),
+          new Padding(padding: EdgeInsets.only(right: 25.0)),
+        ],
+        backgroundColor: Colors.white,
+      ),
         body: new Container(
           alignment: Alignment.centerLeft,
           margin: EdgeInsets.only(
@@ -119,22 +114,22 @@ class _MenuState extends State<Menu> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              new FlatButton.icon(
-                height: 80,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/Services');
-                },
-                icon: Icon(Icons.medical_services_rounded),
-                label: Text(
-                  'S e r v i c e s',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              // new FlatButton.icon(
+              //   height: 80,
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(30)),
+              //   onPressed: () {
+              //     Navigator.of(context).pushNamed('/Services');
+              //   },
+              //   icon: Icon(Icons.medical_services_rounded),
+              //   label: Text(
+              //     'S e r v i c e s',
+              //     style: TextStyle(
+              //         fontSize: 22,
+              //         fontFamily: 'Raleway',
+              //         fontWeight: FontWeight.bold),
+              //   ),
+              // ),
               new FlatButton.icon(
                 height: 80,
                 shape: RoundedRectangleBorder(
@@ -196,7 +191,7 @@ class _MenuState extends State<Menu> {
                                 fontWeight: FontWeight.bold),
                           ),
                           onTap: () {
-                            Navigator.of(context).pushNamed('/EditPatientProfile');
+                            Navigator.of(context).pushNamed('/EditDoctorProfile');
                           },
                         ),
                         new ListTile(
@@ -257,58 +252,7 @@ class _MenuState extends State<Menu> {
               ),
             ],
           ),
-        ));
+        )
+    );
   }
 }
-
-// Stack(
-// children: [
-// Container(
-// padding: EdgeInsets.only(top: 17.0,left: 115),
-// child:Icon(Icons.send_rounded),
-// ),
-// Container(
-// padding: EdgeInsets.only(left: 28),
-//
-// margin: EdgeInsets.only(right: 55,left: 100),
-// child: ExpansionTile(
-// key: new Key(_key.toString()),
-// initiallyExpanded: false,
-// title: new Text('C o n t a c t ',
-// style: TextStyle(
-// fontSize: 22,
-// fontFamily: 'Raleway',
-// fontWeight: FontWeight.bold),),
-// children: [
-// new ListTile(
-// title: const Text(
-// 'Contact with us',
-// style: TextStyle(
-// fontFamily: 'Raleway',
-// fontWeight: FontWeight.bold),
-// ),
-// onTap: () {
-// Navigator.of(context).pushNamed('/Contact');
-//
-// _collapse();
-//
-// },
-// ),
-// new ListTile(
-// title: const Text(
-// 'Feedback',
-// style: TextStyle(
-// fontFamily: 'Raleway',
-// fontWeight: FontWeight.bold),
-// ),
-// onTap: () {
-// Navigator.of(context).pushNamed('/FB');
-//
-// _collapse();
-// },
-// ),
-// ],
-// ),
-// ),
-// ],
-// ),

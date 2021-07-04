@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
+import 'package:hp_assistant/Blog2.dart';
 import 'package:hp_assistant/EditDoctorProfile.dart';
+import 'package:hp_assistant/Home2.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/LoginPage.dart';
 import 'package:hp_assistant/Menu.dart';
+import 'package:hp_assistant/Menu2.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,8 +105,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage()),
-                  ModalRoute.withName('/HomePage'),
+                      builder: (BuildContext context) => Home2()),
+                  ModalRoute.withName('/Home2'),
                 );
               },
               icon: Icon(Icons.home_rounded,
@@ -121,8 +124,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => Blog()),
-                  ModalRoute.withName('/Blog'),
+                      builder: (BuildContext context) => Blog2()),
+                  ModalRoute.withName('/Blog2'),
                 );
               },
               icon: Icon(Icons.add_comment_rounded,
@@ -134,8 +137,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => Menu()),
-                  ModalRoute.withName('/Done'),
+                      builder: (BuildContext context) => Menu2()),
+                  ModalRoute.withName('/Menu2'),
                 );
               },
               icon: Icon(Icons.menu_rounded,
