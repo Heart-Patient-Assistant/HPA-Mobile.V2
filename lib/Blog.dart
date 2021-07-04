@@ -170,6 +170,7 @@ class _BlogState extends State<Blog> {
                                           setState(() {
                                             databaseHelper.createCommentData(
                                                 data[newPosition]['id']);
+                                            _textController.clear();
                                             Navigator.pop(context);
                                           });
                                         }
