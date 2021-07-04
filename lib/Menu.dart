@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
-import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/PatientProfile.dart';
-import 'package:hp_assistant/EditDoctorProfile.dart';
+import 'package:hp_assistant/EditProfile.dart';
 import 'package:hp_assistant/EditPassword.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/LoginPage.dart';
-import 'package:hp_assistant/TipsForThePatient.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -193,7 +191,7 @@ class _MenuState extends State<Menu> {
                                 fontWeight: FontWeight.bold),
                           ),
                           onTap: () {
-                            Navigator.of(context).pushNamed('/EditPatientProfile');
+                            Navigator.of(context).pushNamed('/EditProfile');
                           },
                         ),
                         new ListTile(

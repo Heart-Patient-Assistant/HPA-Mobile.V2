@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
-import 'package:hp_assistant/EditPatientProfile.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/Menu.dart';
-import 'package:hp_assistant/PredicitionModel.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

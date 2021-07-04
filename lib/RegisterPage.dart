@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:hp_assistant/DocorInfo.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
-import 'package:hp_assistant/PatientInfo.dart';
+import 'package:hp_assistant/PatientProfile.dart';
 import 'package:hp_assistant/databasehelpler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'TipsForThePatient.dart';
+
 
 
 class RegisterPage extends StatefulWidget {
@@ -25,15 +27,15 @@ class _RegisterPageState extends State<RegisterPage> {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => DoctorInfo()),
-          ModalRoute.withName('/DoctorInfo'),
+              builder: (BuildContext context) => DoctorProfile()),
+          ModalRoute.withName('/DoctorProfile'),
         ); }
       else if( this.typeUser.contains('PATIENT')){
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => PatientInfo()),
-          ModalRoute.withName('/PatientInfo'),
+              builder: (BuildContext context) => Tips()),
+          ModalRoute.withName('/Tips'),
         );
       }
     }
@@ -62,7 +64,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController password = TextEditingController();
   final TextEditingController repeatPassword = TextEditingController();
   final TextEditingController type = TextEditingController();
-  Future<Register> _futureRegister;
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +76,10 @@ class _RegisterPageState extends State<RegisterPage> {
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),
         ),
+
         backgroundColor: Colors.teal.shade600,
       ),
-      body: (_futureRegister == null)
-          ? new ListView(
+      body: new ListView(
               children: <Widget>[
                 new Padding(padding: EdgeInsets.only(top: 32)),
                 Stack(
@@ -285,7 +286,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                       else {
                         setState(() {
-                          _futureRegister = databaseHelper.registerData(
+                          databaseHelper.registerData(
                               email.text.trim().toLowerCase(),
                               firstName.text.trim(),
                               lastName.text.trim(),
@@ -298,15 +299,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => DoctorInfo()),
+                                builder: (BuildContext context) => DoctorProfile()),
                             ModalRoute.withName('/DoctorProfile'),
                           ); }
                           else if( this.typeUser.contains('PATIENT')){
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => PatientInfo()),
-                            ModalRoute.withName('/PatientInfo'),
+                                builder: (BuildContext context) => Tips()),
+                            ModalRoute.withName('/Tips'),
                           );
                         }
 
@@ -327,19 +328,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ],
             )
-          : FutureBuilder<Register>(
-              future: _futureRegister,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(snapshot.data.email);
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                return new Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
+
     );
   }
 

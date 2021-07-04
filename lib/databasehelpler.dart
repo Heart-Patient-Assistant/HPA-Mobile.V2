@@ -9,8 +9,7 @@ String token= "0";
 class DatabaseHelper {
   var status;
 
-
-  Future<Register> registerData(String email, String firstName, String lastName, String password, String password2, String type) async {
+  Future<String> registerData(String email, String firstName, String lastName, String password, String password2, String type) async {
     final response = await http.post(
         Uri.parse("https://mahdy.pythonanywhere.com/api/users/signup/"),
         headers: <String, String>{
@@ -25,7 +24,13 @@ class DatabaseHelper {
           "type": "$type"
         }));
     print(response.statusCode);
+    print(response.body.contains("DOCTOR"));
+    print(response.body);
+
     var data = json.decode(response.body);
+    token = data["token"];
+    print('data : ${data["token"]}' );
+    print('token: $token');
 
     if (status = response.body.contains('non_field_errors')) {
       print('data : ${data["non_field_errors"]}');
@@ -71,7 +76,7 @@ class DatabaseHelper {
       print('data : ${data["non_field_errors"]}');
     } else {
       print('data : ${data["token"]}');
-      //_save(data["token"]);
+      _save(data["token"]);
     }
   }
 
@@ -146,42 +151,37 @@ class DatabaseHelper {
 
   }
 
-  Future<AddDoctor> addDoctorData(String birthDate, String location) async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key) ?? 0;
+
+
+  Future<String> editData(String user, String bio,String profilePic,String facebookUrl, String twitterUrl,String instagramUrl, String academicTitle,
+      String speciality, String employmentHistory,String experience, String phoneNumber,String birthDate, String location,) async {
+       print(token);
     final response = await http.post(
         Uri.parse("https://mahdy.pythonanywhere.com/api/users/editprofile/"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $value'
+          'Authorization': 'Token $token',
         },
-        body: {
+        body: jsonEncode(<String, String>{
+          "user": "$user",
+          "bio": "$bio",
+          "profilePic": "$profilePic",
+          "facebookUrl": "$facebookUrl",
+          "twitterUrl": "$twitterUrl",
+          "instagramUrl": "$instagramUrl",
+          "academicTitle": "$academicTitle",
+          "speciality": "$speciality",
+          "employmentHistory": "$employmentHistory",
+          "experience": "$experience",
+          "phoneNumber": "$phoneNumber",
           "birth_date": "$birthDate",
           "location": "$location",
-        });
+
+        }));
     print('Response status : ${response.statusCode}');
     print('Response body : ${response.body}');
   }
 
-  Future<AddPatient> addPatientData(String birthDate, String location) async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key) ?? 0;
-
-    final response = await http.post(
-        Uri.parse("https://mahdy.pythonanywhere.com/api/users/editprofile/"),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $value'
-        },
-        body: {
-          "birth_date": "$birthDate",
-          "location": "$location",
-        });
-    print('Response status : ${response.statusCode}');
-    print('Response body : ${response.body}');
-  }
 
   Future<FB> FbData(String rate, String feedbackCategory, String msg) async {
     final response = await http.post(
@@ -198,66 +198,15 @@ class DatabaseHelper {
     print(response.body);
   }
 
-  void editDoctorData(
-    String firstName,
-    String lastName,
-    String email,
-    String password,
-    String password2,
-    String birthDate,
-    String location,
-  ) async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key) ?? 0;
 
-    final response = await http.put(
-        Uri.parse("https://mahdy.pythonanywhere.com/api/users/editprofile/"),
+  Future<getD> getData(String email,String firstName,String lastName,String location,String bio,String webUrl,String birthDate,) async {
+    final response = await http.get(
+        Uri.parse("https://mahdy.pythonanywhere.com/api/users/"),
         headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $value'
+          'Content-Type': "application/json; charset=UTF-8",
+          'Authorization': 'Token $token',
         },
-        body: {
-          "email": "$email",
-          "first_name": "$firstName",
-          "last_name": "$lastName",
-          "password": "$password",
-          "password2": "$password2",
-          "birthDate": "$birthDate",
-          "location": "$location",
-        });
-    print('Response status : ${response.statusCode}');
-    print('Response body : ${response.body}');
-  }
-
-  void editPatientData(
-    String firstName,
-    String lastName,
-    String email,
-    String password,
-    String password2,
-    String birthDate,
-    String location,
-  ) async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key) ?? 0;
-
-    final response = await http.put(
-        Uri.parse("https://mahdy.pythonanywhere.com/api/users/editprofile/"),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $value'
-        },
-        body: {
-          "email": "$email",
-          "first_name": "$firstName",
-          "last_name": "$lastName",
-          "password": "$password",
-          "password2": "$password2",
-          "birthDate": "$birthDate",
-          "location": "$location",
-        });
+        );
     print('Response status : ${response.statusCode}');
     print('Response body : ${response.body}');
   }
@@ -333,31 +282,66 @@ class Login {
   }
 }
 
-class AddDoctor {
-  final String location;
-  final String birthDate;
+class editD {
+  final   String user;
+  final   String bio;
+  final   String profilePic;
+  final   String facebookUrl;
+  final   String twitterUrl;
+  final   String instagramUrl;
+  final   String academicTitle;
+  final   String speciality;
+  final   String employmentHistory;
+  final   String experience;
+  final   String phoneNumber;
+  final   String birthDate;
+  final   String location;
 
-  AddDoctor({this.location, this.birthDate});
-  factory AddDoctor.fromJson(Map<String, dynamic> json) {
-    return AddDoctor(
+  editD({this.user, this.bio,this.profilePic, this.facebookUrl,this.twitterUrl, this.instagramUrl,this.academicTitle,
+    this.speciality,this.employmentHistory, this.experience,this.phoneNumber, this.birthDate,this.location,});
+  factory editD.fromJson(Map<String, dynamic> json) {
+    return editD(
+      user: json['user'],
+      bio: json['bio'],
+      profilePic: json['profilePic'],
+      facebookUrl: json['facebookUrl'],
+      twitterUrl: json['twitterUrl'],
+      instagramUrl: json['instagramUrl'],
+      academicTitle: json['academicTitle'],
+      speciality: json['speciality'],
+      employmentHistory: json['employmentHistory'],
+      experience: json['experience'],
+      phoneNumber: json['phoneNumber'],
+      birthDate: json['birthDate'],
       location: json['location'],
+
+    );
+  }
+}
+
+class getD {
+  final   String email;
+  final   String firstName;
+  final   String lastName;
+  final   String location;
+  final   String bio;
+  final   String webUrl;
+  final   String birthDate;
+
+  getD({this.email, this.firstName,this.lastName, this.location,this.bio, this.webUrl,this.birthDate});
+  factory getD.fromJson(Map<String, dynamic> json) {
+    return getD(
+      email: json['email'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      location: json['location'],
+      bio: json['bio'],
+      webUrl: json['webUrl'],
       birthDate: json['birthDate'],
     );
   }
 }
 
-class AddPatient {
-  final String location;
-  final String birthDate;
-
-  AddPatient({this.location, this.birthDate});
-  factory AddPatient.fromJson(Map<String, dynamic> json) {
-    return AddPatient(
-      location: json['location'],
-      birthDate: json['birthDate'],
-    );
-  }
-}
 class newPost {
   final String title;
   final String body;
