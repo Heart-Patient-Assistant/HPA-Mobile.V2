@@ -1,28 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
+import 'package:hp_assistant/Home2.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/Menu.dart';
+import 'package:hp_assistant/Menu2.dart';
 
 import 'PatientProfile.dart';
 import 'databasehelpler.dart';
 
-class Blog extends StatefulWidget {
+
+class Blog2 extends StatefulWidget {
+
   @override
-  _BlogState createState() => _BlogState();
+  _Blog2State createState() => _Blog2State();
 }
 
-class _BlogState extends State<Blog> {
+class _Blog2State extends State<Blog2> {
   DatabaseHelper databaseHelper = new DatabaseHelper();
 
   final TextEditingController _textController = new TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-
-    return new Scaffold(
+    return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade600,
         onPressed: () {
@@ -42,8 +44,8 @@ class _BlogState extends State<Blog> {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => HomePage()),
-                ModalRoute.withName('/HomePage'),
+                    builder: (BuildContext context) => Home2()),
+                ModalRoute.withName('/Home2'),
               );
             },
             icon: Icon(
@@ -56,8 +58,8 @@ class _BlogState extends State<Blog> {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => PatientProfile()),
-                ModalRoute.withName('/PatientProfile'),
+                    builder: (BuildContext context) => DoctorProfile()),
+                ModalRoute.withName('/DoctorProfile'),
               );
             },
             icon: Icon(
@@ -78,8 +80,8 @@ class _BlogState extends State<Blog> {
             onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (BuildContext context) => Menu()),
-                ModalRoute.withName('/Menu'),
+                MaterialPageRoute(builder: (BuildContext context) => Menu2()),
+                ModalRoute.withName('/Menu2'),
               );
             },
             icon: Icon(
@@ -136,10 +138,11 @@ class _BlogState extends State<Blog> {
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(40)),
+                                        BorderRadius.circular(40)),
                                     labelText: 'Please Write Your Comment',
                                     hintMaxLines: 100,
                                   ),
+
                                 ),
                                 actions: [
                                   FlatButton(
@@ -149,21 +152,21 @@ class _BlogState extends State<Blog> {
                                           showDialog(
                                               context: context,
                                               builder: (context) {return AlertDialog(
-                                                  title: new Text('Please Insert Your comment',
-                                                    style: TextStyle(color: Colors.teal.shade600),
-                                                  ),
-                                                  actions: [FlatButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(context);
-                                                        },
-                                                        child: new Text(
-                                                          'Ok',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.blue),
-                                                        ))
-                                                  ],
-                                                );
+                                                title: new Text('Please Insert Your comment',
+                                                  style: TextStyle(color: Colors.teal.shade600),
+                                                ),
+                                                actions: [FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: new Text(
+                                                      'Ok',
+                                                      style: TextStyle(
+                                                          color:
+                                                          Colors.blue),
+                                                    ))
+                                                ],
+                                              );
                                               });
                                         } else {
                                           print(_textController);
@@ -172,7 +175,8 @@ class _BlogState extends State<Blog> {
                                                 data[newPosition]['id']);
                                             _textController.clear();
                                             Navigator.pop(context);
-                                          });
+                                          }
+                                              );
                                         }
                                       },
                                       child: new Text(
@@ -270,11 +274,11 @@ class _BlogState extends State<Blog> {
                     });
               }
 
-              );
+          );
         },
       ),
 
     );
+
   }
 }
-
