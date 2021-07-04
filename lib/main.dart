@@ -16,14 +16,11 @@ import 'package:hp_assistant/Diet/Lunch/Lunch.dart';
 import 'package:hp_assistant/Diet/Lunch/Meal4.dart';
 import 'package:hp_assistant/Diet/Lunch/Meal5.dart';
 import 'package:hp_assistant/Diet/Lunch/Meal6.dart';
-import 'package:hp_assistant/DocorInfo.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
-import 'package:hp_assistant/EditDoctorProfile.dart';
 import 'package:hp_assistant/EditPassword.dart';
-import 'package:hp_assistant/EditPatientProfile.dart';
+import 'package:hp_assistant/EditProfile.dart';
 import 'package:hp_assistant/LoginPage.dart';
 import 'package:hp_assistant/Menu.dart';
-import 'package:hp_assistant/PatientInfo.dart';
 import 'package:hp_assistant/PatientProfile.dart';
 import 'package:hp_assistant/PredicitionModel.dart';
 import 'package:hp_assistant/RegisterPage.dart';
@@ -49,8 +46,6 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/LoginPage': (BuildContext context) => new LoginPage(),
         '/PatientProfile': (BuildContext context) => new PatientProfile(),
-        '/PatientInfo': (BuildContext context) => new PatientInfo(),
-        '/DoctorInfo': (BuildContext context) => new DoctorInfo(),
         '/RegisterPage': (BuildContext context) => new RegisterPage(),
         '/Menu': (BuildContext context) => new Menu(),
         '/HomePage': (BuildContext context) => new HomePage(),
@@ -63,8 +58,6 @@ class MyApp extends StatelessWidget {
         '/Contact': (BuildContext context) => new Contact(),
         '/Settings': (BuildContext context) => new Settings(),
         '/Search': (BuildContext context) => new Search(),
-        '/EditPatientProfile': (BuildContext context) => new EditPatientProfile(),
-        '/EditDoctorProfile': (BuildContext context) => new EditDoctorProfile(),
         '/EditPassword': (BuildContext context) => new EditPassword(),
         '/FB': (BuildContext context) => new FB(),
         '/Diet': (BuildContext context) => new Diet(),
@@ -82,6 +75,7 @@ class MyApp extends StatelessWidget {
         '/Meal8': (BuildContext context) => new Meal8(),
         '/Meal9': (BuildContext context) => new Meal9(),
         '/newPost': (BuildContext context) => new newPost(),
+        '/EditProfile': (BuildContext context) => new EditProfile(),
 
 
 
