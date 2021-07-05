@@ -97,15 +97,14 @@ class DatabaseHelper {
 
   }
 
-
   Future<List> getPostData () async {
 
     final response = await http.get(
-        Uri.parse("https://mahdy.pythonanywhere.com/api/blog/"),
-        headers: <String, String>{
-          'Content-Type': "application/json; charset=UTF-8",
-          "Vary": "Accept",
-        },);
+      Uri.parse("https://mahdy.pythonanywhere.com/api/blog/"),
+      headers: <String, String>{
+        'Content-Type': "application/json; charset=UTF-8",
+        "Vary": "Accept",
+      },);
 
 
     return json.decode(response.body) ;
@@ -113,6 +112,7 @@ class DatabaseHelper {
     print(response.body);
 
   }
+
 
   Future<Map> getDPostData (int id) async {
 

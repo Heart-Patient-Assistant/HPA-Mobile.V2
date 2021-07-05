@@ -13,16 +13,18 @@ class Blog extends StatefulWidget {
 }
 
 class _BlogState extends State<Blog> {
-  DatabaseHelper databaseHelper = new DatabaseHelper();
 
+  DatabaseHelper databaseHelper = new DatabaseHelper();
   final TextEditingController _textController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
     return new Scaffold(
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade600,
         onPressed: () {
@@ -34,8 +36,9 @@ class _BlogState extends State<Blog> {
           size: 40,
         ),
       ),
-      appBar: AppBar(
-        actions: [
+
+      appBar: AppBar( actions: [
+
           FlatButton.icon(
             label: Text(''),
             onPressed: () {
@@ -50,6 +53,7 @@ class _BlogState extends State<Blog> {
               Icons.home_rounded,
             ),
           ),
+
           FlatButton.icon(
             label: Text(''),
             onPressed: () {
@@ -64,6 +68,7 @@ class _BlogState extends State<Blog> {
               Icons.account_circle_rounded,
             ),
           ),
+
           FlatButton.icon(
             label: Text(''),
             onPressed: null,
@@ -73,6 +78,7 @@ class _BlogState extends State<Blog> {
               size: 50,
             ),
           ),
+
           FlatButton.icon(
             label: Text(''),
             onPressed: () {
@@ -86,11 +92,18 @@ class _BlogState extends State<Blog> {
               Icons.menu_rounded,
             ),
           ),
+
           new Padding(padding: EdgeInsets.only(right: 15.0)),
+
         ],
+
         backgroundColor: Colors.white,
       ),
-      body: FutureBuilder(
+
+
+      body:
+
+      FutureBuilder(
         future: databaseHelper.getPostData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -106,20 +119,21 @@ class _BlogState extends State<Blog> {
                     title: new Text(
                       '${data[newPosition]['title']}',
                       style: TextStyle(
-                        color: Colors.teal.shade600,
+                        color: Colors.black,
                         fontSize: 22.0,
                       ),
                     ),
+
                     subtitle: new Text(
                       '${data[newPosition]['body']}',
                       style: TextStyle(
-                        color: Colors.teal.shade600,
+                        color: Colors.black38,
                         fontSize: 14.0,
                       ),
                     ),
+
                     trailing: new RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -144,117 +158,124 @@ class _BlogState extends State<Blog> {
                                 actions: [
                                   FlatButton(
                                       onPressed: () {
-                                        //Navigator.pop(context);
                                         if (_textController.text.trim().isEmpty) {
                                           showDialog(
                                               context: context,
                                               builder: (context) {return AlertDialog(
                                                   title: new Text('Please Insert Your comment',
-                                                    style: TextStyle(color: Colors.teal.shade600),
+                                                    style: TextStyle(color: Colors.red.shade700),
                                                   ),
                                                   actions: [FlatButton(
                                                         onPressed: () {
                                                           Navigator.pop(context);
                                                         },
-                                                        child: new Text(
-                                                          'Ok',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.blue),
-                                                        ))
+                                                        child: new Text('Ok',
+                                                          style: TextStyle(color: Colors.teal.shade600),)
+                                                  )
                                                   ],
                                                 );
                                               });
                                         } else {
                                           print(_textController);
                                           setState(() {
-                                            databaseHelper.createCommentData(
-                                                data[newPosition]['id']);
+                                            databaseHelper.createCommentData(data[newPosition]['id']);
                                             _textController.clear();
                                             Navigator.pop(context);
                                           });
                                         }
                                       },
-                                      child: new Text(
-                                        'Done',
-                                        style: TextStyle(color: Colors.blue),
-                                      ))
-                                ],
-                              );
+
+                                      child: new Text('Done', style: TextStyle(color: Colors.blue),),
+
+                                  )
+
+                                ],);
                             });
                       },
-                      child: Text(
-                        "comment",
+
+                      child: Text("comment",
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: 'Raleway',
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      color: Colors.teal.shade500,
+                      color: Colors.blue.shade700,
                       textColor: Colors.white,
                     ),
+
                     leading: new CircleAvatar(
                       child: new Text('P ${data[newPosition]['id']}'),
-                      backgroundColor: Colors.teal.shade600,
+                      backgroundColor: Colors.pink.shade400,
                       foregroundColor: Colors.white,
                     ),
+
                     onTap: () async {
-                      Map map = await DatabaseHelper()
-                          .getDPostData(data[newPosition]['id']);
+                      Map map = await DatabaseHelper().getDPostData(data[newPosition]['id']);
+
+
                       showDialog(
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: new Text(
-                                'Details',
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                              content: Column(
-                                textDirection: TextDirection.ltr,
-                                children: [
-                                  Text(
-                                    "ID: ${map['id']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
+                              title: new Text('Details & Comments',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 20.0,),),
+                              content:Row(
+                                children:[  new Column(
+                                  textDirection: TextDirection.ltr,
+                                  mainAxisSize: MainAxisSize.min,
+                                   children:[
+                                    Text("ID: ${map['id']}",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.teal.shade600,
+                                        fontSize: 14.0,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "Author: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
+
+                                    Text(
+                                      "Author: ${map['author']}",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.teal.shade600,
+                                        fontSize: 14.0,
+                                      ),
                                     ),
+                                     Text(
+                                       "title: ${map['author']}",
+                                       textAlign: TextAlign.left,
+                                       style: TextStyle(
+                                         color: Colors.teal.shade600,
+                                         fontSize: 14.0,
+                                       ),
+                                     ),
+                                     Text(
+                                       "post_date: ${map['author']}",
+                                       textAlign: TextAlign.left,
+                                       style: TextStyle(
+                                         color: Colors.teal.shade600,
+                                         fontSize: 14.0,
+                                       ),
+                                     ),
+                                     Text(
+                                       "body: ${map['author']}",
+                                       textAlign: TextAlign.left,
+                                       style: TextStyle(
+                                         color: Colors.teal.shade600,
+                                         fontSize: 14.0,
+                                       ),
+                                     ),
+
+
+
+                                         ]
                                   ),
-                                  Text(
-                                    "title: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "post_date: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "body: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                 ],
+                                ),
+
+
                               actions: [
                                 FlatButton(
                                     onPressed: () {
@@ -277,4 +298,6 @@ class _BlogState extends State<Blog> {
     );
   }
 }
+
+
 
