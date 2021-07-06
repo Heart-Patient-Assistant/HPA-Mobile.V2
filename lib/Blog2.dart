@@ -38,20 +38,20 @@ class _Blog2State extends State<Blog2> {
       ),
       appBar: AppBar(
         actions: [
-          FlatButton.icon(
-            label: Text(''),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => Home2()),
-                ModalRoute.withName('/Home2'),
-              );
-            },
-            icon: Icon(
-              Icons.home_rounded,
-            ),
-          ),
+          // FlatButton.icon(
+          //   label: Text(''),
+          //   onPressed: () {
+          //     Navigator.pushAndRemoveUntil(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (BuildContext context) => Home2()),
+          //       ModalRoute.withName('/Home2'),
+          //     );
+          //   },
+          //   icon: Icon(
+          //     Icons.home_rounded,
+          //   ),
+          // ),
           FlatButton.icon(
             label: Text(''),
             onPressed: () {
@@ -204,8 +204,8 @@ class _Blog2State extends State<Blog2> {
                       foregroundColor: Colors.white,
                     ),
                     onTap: () async {
-                      Map map = await DatabaseHelper()
-                          .getDPostData(data[newPosition]['id']);
+                      Map map = await DatabaseHelper().getDPostData(data[newPosition]['id']);
+                      List comment = await databaseHelper.getCommentData(data[newPosition]['id']);
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -257,6 +257,30 @@ class _Blog2State extends State<Blog2> {
                                       fontSize: 14.0,
                                     ),
                                   ),
+
+                                  new Padding(padding: EdgeInsets.all( 10.0)),
+
+                                  Text(
+                                    "All Comments:",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: Colors.blue.shade600,
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+
+                                  for(var x = 0; x < comment.length; x++ )
+                                    Card(child: (
+                                        Text("${comment[x]['body']} By :${comment[x]['author']} ",
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            color: Colors.teal.shade600,
+                                            fontSize: 17.0,
+                                          ),
+                                        )
+
+                                    ),
+                                    ),
                                 ],
                               ),
                               actions: [

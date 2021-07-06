@@ -35,20 +35,20 @@ class _Menu2State extends State<Menu2> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          FlatButton.icon(
-            label: Text(''),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => Home2()),
-                ModalRoute.withName('/Home2'),
-              );
-            },
-            icon: Icon(
-              Icons.home_rounded,
-            ),
-          ),
+          // FlatButton.icon(
+          //   label: Text(''),
+          //   onPressed: () {
+          //     Navigator.pushAndRemoveUntil(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (BuildContext context) => Home2()),
+          //       ModalRoute.withName('/Home2'),
+          //     );
+          //   },
+          //   icon: Icon(
+          //     Icons.home_rounded,
+          //   ),
+          // ),
           FlatButton.icon(
             label: Text(''),
             onPressed: () {

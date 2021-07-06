@@ -6,12 +6,17 @@ import 'package:hp_assistant/Menu.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+
+
 class DoctorProfile extends StatefulWidget {
   @override
   _DoctorProfileState createState() => _DoctorProfileState();
 }
 
 class _DoctorProfileState extends State<DoctorProfile> {
+
+
   PickedFile _imageFile2;
   final ImagePicker picker2 = ImagePicker();
   String _imagePath2;
@@ -93,19 +98,19 @@ class _DoctorProfileState extends State<DoctorProfile> {
         appBar: AppBar(
           backgroundColor: Colors.white ,
           actions: [
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage()),
-                  ModalRoute.withName('/HomePage'),
-                );
-              },
-              icon: Icon(Icons.home_rounded,
-                  ),
-            ),
+            // FlatButton.icon(
+            //   label: Text(''),
+            //   onPressed: () {
+            //     Navigator.pushAndRemoveUntil(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (BuildContext context) => HomePage()),
+            //       ModalRoute.withName('/HomePage'),
+            //     );
+            //   },
+            //   icon: Icon(Icons.home_rounded,
+            //       ),
+            // ),
             FlatButton.icon(
               label: Text(''),
               onPressed: null,
@@ -208,32 +213,3 @@ class _DoctorProfileState extends State<DoctorProfile> {
 
 
 
-// FlatButton.icon(
-//   onPressed: () {
-//     Navigator.of(context).push(new MaterialPageRoute(
-//       builder: (BuildContext context) => new EditDoctorProfile(),
-//     ));
-//   },
-//   icon: Icon(Icons.edit,
-//       color: Colors.white),
-//   label: Text(''),
-//   onLongPress: () {
-//     showDialog(
-//         context: context,
-//         builder: (context) {
-//           return AlertDialog(
-//             title: Text("Edit Your Personal Information"),
-//             actions: [
-//               FlatButton(
-//                   onPressed: () {
-//                     Navigator.pop(context);
-//                   },
-//                   child: new Text(
-//                     "Ok",
-//                     style: TextStyle(color: Colors.blue),
-//                   ))
-//             ],
-//           );
-//         });
-//   },
-//),

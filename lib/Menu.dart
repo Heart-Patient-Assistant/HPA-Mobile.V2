@@ -38,20 +38,20 @@ class _MenuState extends State<Menu> {
     return Scaffold(
         appBar: AppBar(
           actions: [
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage()),
-                  ModalRoute.withName('/HomePage'),
-                );
-              },
-              icon: Icon(
-                Icons.home_rounded,
-              ),
-            ),
+            // FlatButton.icon(
+            //   label: Text(''),
+            //   onPressed: () {
+            //     Navigator.pushAndRemoveUntil(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (BuildContext context) => HomePage()),
+            //       ModalRoute.withName('/HomePage'),
+            //     );
+            //   },
+            //   icon: Icon(
+            //     Icons.home_rounded,
+            //   ),
+            // ),
             FlatButton.icon(
               label: Text(''),
               onPressed: () {

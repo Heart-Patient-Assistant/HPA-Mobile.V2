@@ -152,6 +152,29 @@ class DatabaseHelper {
   }
 
 
+  Future<List> getCommentData (int id) async {
+
+    final response = await http.get(
+      Uri.parse("https://mahdy.pythonanywhere.com/api/blog/posts/$id/comments/"),
+      headers: <String, String>{
+        'Content-Type': "application/json; charset=UTF-8",
+        "Vary": "Accept",
+      },);
+
+    print(response.statusCode);
+    print(response.body);
+
+
+      return json.decode(response.body) ;
+    //}
+
+
+
+
+  }
+
+
+
 
   Future<String> editData(String user, String bio,String profilePic,String facebookUrl, String twitterUrl,String instagramUrl, String academicTitle,
       String speciality, String employmentHistory,String experience, String phoneNumber,String birthDate, String location,) async {
