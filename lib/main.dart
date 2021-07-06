@@ -26,20 +26,19 @@ import 'package:hp_assistant/PatientProfile.dart';
 import 'package:hp_assistant/PredicitionModel.dart';
 import 'package:hp_assistant/RegisterPage.dart';
 import 'package:hp_assistant/HomePage.dart';
-import 'package:hp_assistant/Search.dart';
 import 'package:hp_assistant/Services.dart';
 import 'package:hp_assistant/Settings.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
 import 'package:hp_assistant/FB.dart';
 import 'package:hp_assistant/newPost.dart';
-
+import 'homepage.dart';
 
 
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
+
   @override
   Widget  build(BuildContext context) {
 
@@ -50,7 +49,7 @@ class MyApp extends StatelessWidget {
           '/PatientProfile': (BuildContext context) => new PatientProfile(),
           '/RegisterPage': (BuildContext context) => new RegisterPage(),
           '/Menu': (BuildContext context) => new Menu(),
-          '/HomePage': (BuildContext context) => new HomePage(),
+          //'/HomePage': (BuildContext context) => new HomePage(),
           '/DoctorProfile': (BuildContext context) => new DoctorProfile(),
           '/Prediction': (BuildContext context) => new PredictionModel(),
           '/Tips': (BuildContext context) => new Tips(),
@@ -59,7 +58,6 @@ class MyApp extends StatelessWidget {
           '/About': (BuildContext context) => new About(),
           '/Contact': (BuildContext context) => new Contact(),
           '/Settings': (BuildContext context) => new Settings(),
-          '/Search': (BuildContext context) => new Search(),
           '/EditPassword': (BuildContext context) => new EditPassword(),
           '/FB': (BuildContext context) => new FB(),
           '/Diet': (BuildContext context) => new Diet(),

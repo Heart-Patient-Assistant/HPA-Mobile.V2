@@ -7,9 +7,8 @@ import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 class Menu extends StatefulWidget {
+  final List<String> list = List();
   @override
   _MenuState createState() => _MenuState();
 }
@@ -18,7 +17,6 @@ class _MenuState extends State<Menu> {
   int _key;
 
   bool _type;
-
 
   _save(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -31,6 +29,7 @@ class _MenuState extends State<Menu> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -88,25 +87,20 @@ class _MenuState extends State<Menu> {
                 size: 50,
               ),
             ),
-            new Padding(padding: EdgeInsets.only(right: w*0.15)),
+            new Padding(padding: EdgeInsets.only(right: w * 0.15)),
           ],
           backgroundColor: Colors.white,
         ),
-        body: new Container(
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(
-            top: 10.5,
-            left: 22,
-          ),
-          child: new Column(
+        body: new ListView(children: [
+          new Column(
             children: [
-              new Padding(padding: EdgeInsets.only(top: h*0.13)),
+              new Padding(padding: EdgeInsets.only(top: h * 0.02)),
               new FlatButton.icon(
                 height: 80,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/Search');
+                  showSearch(context: context, delegate: Searchh(widget.list));
                 },
                 icon: Icon(Icons.search_rounded),
                 label: Text(
@@ -169,22 +163,22 @@ class _MenuState extends State<Menu> {
               Stack(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 28.0,left: 112.5),
-
-                    child:Icon(Icons.settings_rounded),
+                    padding: EdgeInsets.only(top: 28.0, left: 112.5),
+                    child: Icon(Icons.settings_rounded),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 28,top: 10.0),
-
-                    margin: EdgeInsets.only(right: 55,left: 100),
+                    padding: EdgeInsets.only(left: 28, top: 10.0),
+                    margin: EdgeInsets.only(right: 55, left: 100),
                     child: ExpansionTile(
                       key: new Key(_key.toString()),
                       initiallyExpanded: false,
-                      title: new Text('S e t t i n g s',
+                      title: new Text(
+                        'S e t t i n g s',
                         style: TextStyle(
                             fontSize: 22,
                             fontFamily: 'Raleway',
-                            fontWeight: FontWeight.bold),),
+                            fontWeight: FontWeight.bold),
+                      ),
                       children: [
                         new ListTile(
                           title: const Text(
@@ -214,7 +208,6 @@ class _MenuState extends State<Menu> {
                 ],
               ),
 
-
               //
               // new FlatButton.icon(
               //   height: 80,
@@ -236,13 +229,11 @@ class _MenuState extends State<Menu> {
                 height: 70,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
-                onPressed: (){
+                onPressed: () {
                   _save('0');
-                  Navigator.of(context).push(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context) => new LoginPage(),
-                      )
-                  );
+                  Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => new LoginPage(),
+                  ));
                 },
                 icon: Icon(Icons.logout),
                 label: Text(
@@ -255,58 +246,68 @@ class _MenuState extends State<Menu> {
               ),
             ],
           ),
-        ));
+        ]));
   }
 }
 
-// Stack(
-// children: [
-// Container(
-// padding: EdgeInsets.only(top: 17.0,left: 115),
-// child:Icon(Icons.send_rounded),
-// ),
-// Container(
-// padding: EdgeInsets.only(left: 28),
-//
-// margin: EdgeInsets.only(right: 55,left: 100),
-// child: ExpansionTile(
-// key: new Key(_key.toString()),
-// initiallyExpanded: false,
-// title: new Text('C o n t a c t ',
-// style: TextStyle(
-// fontSize: 22,
-// fontFamily: 'Raleway',
-// fontWeight: FontWeight.bold),),
-// children: [
-// new ListTile(
-// title: const Text(
-// 'Contact with us',
-// style: TextStyle(
-// fontFamily: 'Raleway',
-// fontWeight: FontWeight.bold),
-// ),
-// onTap: () {
-// Navigator.of(context).pushNamed('/Contact');
-//
-// _collapse();
-//
-// },
-// ),
-// new ListTile(
-// title: const Text(
-// 'Feedback',
-// style: TextStyle(
-// fontFamily: 'Raleway',
-// fontWeight: FontWeight.bold),
-// ),
-// onTap: () {
-// Navigator.of(context).pushNamed('/FB');
-//
-// _collapse();
-// },
-// ),
-// ],
-// ),
-// ),
-// ],
-// ),
+class Searchh extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(Icons.close),
+        onPressed: () {
+          query = "";
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  String selectedResult;
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(selectedResult),
+      ),
+    );
+  }
+
+  final List<String> listExample;
+  Searchh(this.listExample);
+  List<String> recentList = ["", ""];
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestionList = [];
+    query.isEmpty
+        ? suggestionList = recentList
+        : suggestionList.addAll(listExample.where(
+            (element) => element.contains(query),
+          ));
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(
+            suggestionList[index],
+          ),
+          onTap: () {
+            selectedResult = suggestionList[index];
+            showResults(context);
+          },
+        );
+      },
+    );
+  }
+}
