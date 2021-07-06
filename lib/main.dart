@@ -19,6 +19,7 @@ import 'package:hp_assistant/Diet/Lunch/Meal6.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/EditPassword.dart';
 import 'package:hp_assistant/EditProfile.dart';
+import 'package:hp_assistant/HealthRecord.dart';
 import 'package:hp_assistant/LoginPage.dart';
 import 'package:hp_assistant/Menu.dart';
 import 'package:hp_assistant/PatientProfile.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
           '/Meal9': (BuildContext context) => new Meal9(),
           '/newPost': (BuildContext context) => new newPost(),
           '/EditProfile': (BuildContext context) => new EditProfile(),
+          '/HealthRecord': (BuildContext context) => new HealthRecord(),
 
 
         },

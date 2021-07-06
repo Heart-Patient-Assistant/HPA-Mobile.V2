@@ -93,7 +93,7 @@ class _BlogState extends State<Blog> {
             ),
           ),
 
-          new Padding(padding: EdgeInsets.only(right: 15.0)),
+        new Padding(padding: EdgeInsets.only(right: w*0.15)),
 
         ],
 

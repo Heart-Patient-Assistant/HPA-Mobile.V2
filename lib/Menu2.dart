@@ -85,7 +85,7 @@ class _Menu2State extends State<Menu2> {
               size: 50,
             ),
           ),
-          new Padding(padding: EdgeInsets.only(right: 25.0)),
+          new Padding(padding: EdgeInsets.only(right: w*0.15)),
         ],
         backgroundColor: Colors.white,
       ),

@@ -6,6 +6,9 @@ import 'package:hp_assistant/Menu.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Blog2.dart';
+import 'Menu2.dart';
+
 
 
 
@@ -93,6 +96,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
 
   @override
   Widget build(BuildContext context) {
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
     return Scaffold(
 
         appBar: AppBar(
@@ -123,8 +128,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => Blog()),
-                  ModalRoute.withName('/Blog'),
+                      builder: (BuildContext context) => Blog2()),
+                  ModalRoute.withName('/Blog2'),
                 );
               },
               icon: Icon(Icons.add_comment_rounded,
@@ -136,14 +141,14 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => Menu()),
-                  ModalRoute.withName('/Done'),
+                      builder: (BuildContext context) => Menu2()),
+                  ModalRoute.withName('/Menu2'),
                 );
               },
               icon: Icon(Icons.menu_rounded,
                   ),
             ),
-           new Padding(padding: EdgeInsets.only(right:15.0)),
+            new Padding(padding: EdgeInsets.only(right: w*0.15)),
 
           ],
         ),

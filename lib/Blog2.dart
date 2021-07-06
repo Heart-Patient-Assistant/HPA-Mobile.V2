@@ -88,7 +88,7 @@ class _Blog2State extends State<Blog2> {
               Icons.menu_rounded,
             ),
           ),
-          new Padding(padding: EdgeInsets.only(right: 15.0)),
+          new Padding(padding: EdgeInsets.only(right: w*0.15)),
         ],
         backgroundColor: Colors.white,
       ),
@@ -108,14 +108,14 @@ class _Blog2State extends State<Blog2> {
                     title: new Text(
                       '${data[newPosition]['title']}',
                       style: TextStyle(
-                        color: Colors.teal.shade600,
+                        color: Colors.black,
                         fontSize: 22.0,
                       ),
                     ),
                     subtitle: new Text(
                       '${data[newPosition]['body']}',
                       style: TextStyle(
-                        color: Colors.teal.shade600,
+                        color: Colors.black38,
                         fontSize: 14.0,
                       ),
                     ),
@@ -153,7 +153,7 @@ class _Blog2State extends State<Blog2> {
                                               context: context,
                                               builder: (context) {return AlertDialog(
                                                 title: new Text('Please Insert Your comment',
-                                                  style: TextStyle(color: Colors.teal.shade600),
+                                                  style: TextStyle(color: Colors.red.shade700),
                                                 ),
                                                 actions: [FlatButton(
                                                     onPressed: () {
@@ -163,7 +163,7 @@ class _Blog2State extends State<Blog2> {
                                                       'Ok',
                                                       style: TextStyle(
                                                           color:
-                                                          Colors.blue),
+                                                          Colors.teal.shade600),
                                                     ))
                                                 ],
                                               );
@@ -195,12 +195,12 @@ class _Blog2State extends State<Blog2> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      color: Colors.teal.shade500,
+                      color: Colors.blue.shade700,
                       textColor: Colors.white,
                     ),
                     leading: new CircleAvatar(
                       child: new Text('P ${data[newPosition]['id']}'),
-                      backgroundColor: Colors.teal.shade600,
+                      backgroundColor: Colors.pink.shade400,
                       foregroundColor: Colors.white,
                     ),
                     onTap: () async {

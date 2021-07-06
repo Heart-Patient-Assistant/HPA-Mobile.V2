@@ -100,8 +100,10 @@ class _PatientProfileState extends State<PatientProfile> {
 
     data = ModalRoute.of(context).settings.arguments;
 
-
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
     return Scaffold(
+
         appBar: AppBar(
           backgroundColor: Colors.white,
           actions: [
@@ -150,7 +152,7 @@ class _PatientProfileState extends State<PatientProfile> {
               icon: Icon(Icons.menu_rounded,
               ),
             ),
-            new Padding(padding: EdgeInsets.only(right: 15.0)),
+            new Padding(padding: EdgeInsets.only(right: w*0.15)),
 
           ],
         ),
