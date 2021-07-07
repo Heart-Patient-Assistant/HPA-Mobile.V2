@@ -14,6 +14,7 @@ class _ActivitiesState extends State<Activities> {
     return Scaffold(
       appBar: new AppBar(
         title: Text("Activities",style: TextStyle(
+            color: Theme.of(context).primaryColor,
             fontSize: 22,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold),

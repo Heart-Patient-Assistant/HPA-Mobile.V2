@@ -36,6 +36,8 @@ class _MenuState extends State<Menu> {
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
+          iconTheme: Theme.of(context).iconTheme,
+          backgroundColor: Colors.teal.shade600,
           actions: [
             // FlatButton.icon(
             //   label: Text(''),
@@ -83,13 +85,13 @@ class _MenuState extends State<Menu> {
               onPressed: null,
               icon: Icon(
                 Icons.menu_rounded,
-                color: Colors.teal.shade600,
+
                 size: 50,
               ),
             ),
             new Padding(padding: EdgeInsets.only(right: w * 0.15)),
           ],
-          backgroundColor: Colors.white,
+
         ),
         body: new ListView(children: [
           new Column(

@@ -29,6 +29,7 @@ class _ContactState extends State<Contact> {
         title: Text(
           'Contact Page',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22,
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),

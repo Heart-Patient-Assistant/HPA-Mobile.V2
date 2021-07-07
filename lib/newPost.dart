@@ -31,6 +31,7 @@ class _newPostState extends State<newPost> {
         title: Text(
           'Create Post',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22, fontFamily: 'Raleway', fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.teal.shade600,

@@ -72,6 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
         title: new Text(
           'Sign Up',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22.0,
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),

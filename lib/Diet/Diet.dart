@@ -16,6 +16,7 @@ class _DietState extends State<Diet> {
     return Scaffold(
       appBar: new AppBar(
         title: Text("Diet",style: TextStyle(
+            color: Theme.of(context).primaryColor,
             fontSize: 22,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold),

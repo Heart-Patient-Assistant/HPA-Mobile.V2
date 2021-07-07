@@ -20,6 +20,7 @@ class _LunchState extends State<Lunch> {
     return Scaffold(
       appBar: new AppBar(
         title: Text("Lunch",style: TextStyle(
+            color: Theme.of(context).primaryColor,
             fontSize: 22,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold),

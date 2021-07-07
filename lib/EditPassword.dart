@@ -25,14 +25,13 @@ class _EditPasswordState extends State<EditPassword> {
             "Edit password",
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 fontSize: 22.0,
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.bold),
           ),
           backgroundColor: Colors.teal.shade600,
         ),
-        backgroundColor: Colors.white,
         body: new ListView(
           children: [
             new Padding(padding: EdgeInsets.only(top: 73)),

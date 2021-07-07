@@ -15,6 +15,7 @@ class _AboutState extends State<About> {
         title: Text(
           'About Us',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22,
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),

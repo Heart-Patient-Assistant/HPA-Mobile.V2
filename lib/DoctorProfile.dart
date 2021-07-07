@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Blog2.dart';
 import 'Menu2.dart';
+import 'change_theme_button_widget.dart';
 
 
 
@@ -96,12 +97,17 @@ class _DoctorProfileState extends State<DoctorProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? 'DarkTheme'
+        : 'LightTheme';
+
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
 
         appBar: AppBar(
-          backgroundColor: Colors.white ,
+          iconTheme: Theme.of(context).iconTheme,
+          backgroundColor: Colors.teal.shade600,
           actions: [
             // FlatButton.icon(
             //   label: Text(''),
@@ -119,8 +125,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
             FlatButton.icon(
               label: Text(''),
               onPressed: null,
-              icon: Icon(Icons.account_circle_rounded,
-                  color: Colors.teal.shade600,size: 50,),
+              icon: Icon(Icons.account_circle_rounded,size: 50,),
             ),
             FlatButton.icon(
               label: Text(''),
@@ -149,6 +154,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                   ),
             ),
             new Padding(padding: EdgeInsets.only(right: w*0.15)),
+            ChangeThemeButtonWidget(),
 
           ],
         ),
@@ -160,14 +166,15 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 children: [
                   _imagePath2 != null
                       ? CircleAvatar(
-                          backgroundImage: FileImage(File(_imagePath2)),
+                    backgroundImage: FileImage(File(_imagePath2)),
+                    backgroundColor: Theme.of(context).iconTheme.color,
                           radius: 70,
                         )
                       : CircleAvatar(
-                          backgroundImage: _imageFile2 == null
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundImage: _imageFile2 == null
                               ? AssetImage('img/doctorIcon2.jpg')
                               : FileImage(File(_imageFile2.path)),
-                          backgroundColor: Colors.blueGrey,
                           radius: 70,
                           child: Container(
                             padding: EdgeInsets.only(top: 100.0, left: 90.0),

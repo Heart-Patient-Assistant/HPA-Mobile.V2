@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/Menu.dart';
+import 'package:hp_assistant/theme_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hp_assistant/theme_provider.dart';
+
+import 'change_theme_button_widget.dart';
+
 
 class PatientProfile extends StatefulWidget {
   @override
@@ -17,6 +22,7 @@ class _PatientProfileState extends State<PatientProfile> {
   final ImagePicker picker = ImagePicker();
   String _imagePath;
   List post_data;
+
 
 
   @override
@@ -96,6 +102,9 @@ class _PatientProfileState extends State<PatientProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+    ? 'DarkTheme'
+    : 'LightTheme';
 
     data = ModalRoute.of(context).settings.arguments;
 
@@ -104,8 +113,10 @@ class _PatientProfileState extends State<PatientProfile> {
     return Scaffold(
 
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          iconTheme: Theme.of(context).iconTheme,
+          backgroundColor: Colors.teal.shade600,
           actions: [
+           // ChangeThemeButtonWidget(),
             // FlatButton.icon(
             //   label: Text(''),
             //   onPressed: () {
@@ -123,7 +134,7 @@ class _PatientProfileState extends State<PatientProfile> {
               label: Text(''),
               onPressed: null,
               icon: Icon(Icons.account_circle_rounded,
-                color: Colors.teal.shade600, size: 50,),
+                 size: 50,),
             ),
             FlatButton.icon(
               label: Text(''),
@@ -152,6 +163,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             new Padding(padding: EdgeInsets.only(right: w*0.15)),
+            ChangeThemeButtonWidget(),
 
           ],
         ),
@@ -163,13 +175,17 @@ class _PatientProfileState extends State<PatientProfile> {
                 _imagePath != null
                     ? CircleAvatar(
                   backgroundImage: FileImage(File(_imagePath)),
+                  backgroundColor: Theme.of(context).iconTheme.color,
                   radius: 70,
                 )
                     : CircleAvatar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
                   backgroundImage: _imageFile == null
                       ? AssetImage('img/Icon0.png')
                       : FileImage(File(_imageFile.path)),
                   radius: 70,
+
                   child: Container(
                     padding: EdgeInsets.only(top: 100.0, left: 90.0),
                     child: InkWell(
@@ -184,6 +200,12 @@ class _PatientProfileState extends State<PatientProfile> {
                       ),
                     ),
                   ),
+
+
+
+
+
+
                   // Container(
                   //   padding: EdgeInsets.only(top: 100.0,),
                   //   child: InkWell(
@@ -203,12 +225,15 @@ class _PatientProfileState extends State<PatientProfile> {
                 new Text(
                   "Patient's Name",
                   style: TextStyle(
+                    //color: Theme.of(context).iconTheme.color,
                       fontSize: 20.0, fontStyle: FontStyle.italic),
                 ),
               ],
             ),
             new Padding(padding: EdgeInsets.all(20.0)),
             new Card(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              //color: Theme.of(context).primaryColor,
               child: new Column(
                 children: [
                   new Text("Age:"),
@@ -225,13 +250,17 @@ class _PatientProfileState extends State<PatientProfile> {
               },
               child: Text("Save Picture"),
             ),
-            new Padding(padding: EdgeInsets.all(40.0)),
+            new Padding(padding: EdgeInsets.all(10.0)),
+           
+
 
 
 
 
           ],
-        ));
+        )
+
+    );
 
   }
 

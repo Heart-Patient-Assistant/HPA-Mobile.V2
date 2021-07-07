@@ -64,6 +64,7 @@ class _HealthRecordState extends State<HealthRecord> {
         title: Text(
           'Health Record',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22,
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),

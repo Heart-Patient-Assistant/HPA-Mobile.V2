@@ -31,6 +31,8 @@ import 'package:hp_assistant/Settings.dart';
 import 'package:hp_assistant/TipsForThePatient.dart';
 import 'package:hp_assistant/FB.dart';
 import 'package:hp_assistant/newPost.dart';
+import 'package:hp_assistant/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'homepage.dart';
 
 
@@ -38,52 +40,58 @@ import 'homepage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+static const String title = 'Light & Dark Theme';
+
 
   @override
-  Widget  build(BuildContext context) {
+  Widget  build(BuildContext context) => ChangeNotifierProvider(
+create: (context) => ThemeProvider(),
+builder: (context, _) {
+  final themeProvider = Provider.of<ThemeProvider>(context);
+  return MaterialApp(
+    routes: <String, WidgetBuilder>{
+      '/LoginPage': (BuildContext context) => new LoginPage(),
+      '/PatientProfile': (BuildContext context) => new PatientProfile(),
+      '/RegisterPage': (BuildContext context) => new RegisterPage(),
+      '/Menu': (BuildContext context) => new Menu(),
+      //'/HomePage': (BuildContext context) => new HomePage(),
+      '/DoctorProfile': (BuildContext context) => new DoctorProfile(),
+      '/Prediction': (BuildContext context) => new PredictionModel(),
+      '/Tips': (BuildContext context) => new Tips(),
+      '/Blog': (BuildContext context) => new Blog(),
+      '/Services': (BuildContext context) => new Services(),
+      '/About': (BuildContext context) => new About(),
+      '/Contact': (BuildContext context) => new Contact(),
+      '/Settings': (BuildContext context) => new Settings(),
+      '/EditPassword': (BuildContext context) => new EditPassword(),
+      '/FB': (BuildContext context) => new FB(),
+      '/Diet': (BuildContext context) => new Diet(),
+      '/Activities': (BuildContext context) => new Activities(),
+      '/Breakfast': (BuildContext context) => new Breakfast(),
+      '/Dinner': (BuildContext context) => new Dinner(),
+      '/Lunch': (BuildContext context) => new Lunch(),
+      '/Meal1': (BuildContext context) => new Meal1(),
+      '/Meal2': (BuildContext context) => new Meal2(),
+      '/Meal3': (BuildContext context) => new Meal3(),
+      '/Meal4': (BuildContext context) => new Meal4(),
+      '/Meal5': (BuildContext context) => new Meal5(),
+      '/Meal6': (BuildContext context) => new Meal6(),
+      '/Meal7': (BuildContext context) => new Meal7(),
+      '/Meal8': (BuildContext context) => new Meal8(),
+      '/Meal9': (BuildContext context) => new Meal9(),
+      '/newPost': (BuildContext context) => new newPost(),
+      '/EditProfile': (BuildContext context) => new EditProfile(),
+      '/HealthRecord': (BuildContext context) => new HealthRecord(),
 
 
-      return MaterialApp(
-        routes: <String, WidgetBuilder>{
-          '/LoginPage': (BuildContext context) => new LoginPage(),
-          '/PatientProfile': (BuildContext context) => new PatientProfile(),
-          '/RegisterPage': (BuildContext context) => new RegisterPage(),
-          '/Menu': (BuildContext context) => new Menu(),
-          //'/HomePage': (BuildContext context) => new HomePage(),
-          '/DoctorProfile': (BuildContext context) => new DoctorProfile(),
-          '/Prediction': (BuildContext context) => new PredictionModel(),
-          '/Tips': (BuildContext context) => new Tips(),
-          '/Blog': (BuildContext context) => new Blog(),
-          '/Services': (BuildContext context) => new Services(),
-          '/About': (BuildContext context) => new About(),
-          '/Contact': (BuildContext context) => new Contact(),
-          '/Settings': (BuildContext context) => new Settings(),
-          '/EditPassword': (BuildContext context) => new EditPassword(),
-          '/FB': (BuildContext context) => new FB(),
-          '/Diet': (BuildContext context) => new Diet(),
-          '/Activities': (BuildContext context) => new Activities(),
-          '/Breakfast': (BuildContext context) => new Breakfast(),
-          '/Dinner': (BuildContext context) => new Dinner(),
-          '/Lunch': (BuildContext context) => new Lunch(),
-          '/Meal1': (BuildContext context) => new Meal1(),
-          '/Meal2': (BuildContext context) => new Meal2(),
-          '/Meal3': (BuildContext context) => new Meal3(),
-          '/Meal4': (BuildContext context) => new Meal4(),
-          '/Meal5': (BuildContext context) => new Meal5(),
-          '/Meal6': (BuildContext context) => new Meal6(),
-          '/Meal7': (BuildContext context) => new Meal7(),
-          '/Meal8': (BuildContext context) => new Meal8(),
-          '/Meal9': (BuildContext context) => new Meal9(),
-          '/newPost': (BuildContext context) => new newPost(),
-          '/EditProfile': (BuildContext context) => new EditProfile(),
-          '/HealthRecord': (BuildContext context) => new HealthRecord(),
+    },
 
+    home: new LoginPage(),
+    themeMode: themeProvider.themeMode,
+    theme: MyThemes.lightTheme,
+    darkTheme: MyThemes.darkTheme,
 
-        },
-
-        home: new LoginPage(),
-
-      );
-
-  }
+  );
+},
+  );
 }

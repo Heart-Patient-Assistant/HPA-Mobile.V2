@@ -12,6 +12,7 @@ class _BreakfastState extends State<Breakfast> {
     return Scaffold(
       appBar: new AppBar(
         title: Text("Breakfast",style: TextStyle(
+            color: Theme.of(context).primaryColor,
             fontSize: 22,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold),

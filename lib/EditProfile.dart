@@ -39,6 +39,7 @@ class _EditProfileState extends State<EditProfile> {
         title: new Text(
           'Edit your Information',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22.0,
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),

@@ -19,6 +19,7 @@ class _TipsState extends State<Tips> {
           "Tips",
           textAlign: TextAlign.center,
           style: TextStyle(
+            color: Theme.of(context).primaryColor,
             fontSize: 22.0,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,

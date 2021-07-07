@@ -37,6 +37,8 @@ class _Blog2State extends State<Blog2> {
         ),
       ),
       appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
+        backgroundColor: Colors.teal.shade600,
         actions: [
           // FlatButton.icon(
           //   label: Text(''),
@@ -71,7 +73,6 @@ class _Blog2State extends State<Blog2> {
             onPressed: null,
             icon: Icon(
               Icons.add_comment_rounded,
-              color: Colors.teal.shade600,
               size: 50,
             ),
           ),
@@ -90,7 +91,6 @@ class _Blog2State extends State<Blog2> {
           ),
           new Padding(padding: EdgeInsets.only(right: w*0.15)),
         ],
-        backgroundColor: Colors.white,
       ),
       body: FutureBuilder(
         future: databaseHelper.getPostData(),
@@ -108,14 +108,14 @@ class _Blog2State extends State<Blog2> {
                     title: new Text(
                       '${data[newPosition]['title']}',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                         fontSize: 22.0,
                       ),
                     ),
                     subtitle: new Text(
                       '${data[newPosition]['body']}',
                       style: TextStyle(
-                        color: Colors.black38,
+                        color: Theme.of(context).primaryColor,
                         fontSize: 14.0,
                       ),
                     ),
@@ -205,88 +205,99 @@ class _Blog2State extends State<Blog2> {
                     ),
                     onTap: () async {
                       Map map = await DatabaseHelper().getDPostData(data[newPosition]['id']);
+                      print(map);
                       List comment = await databaseHelper.getCommentData(data[newPosition]['id']);
+
                       showDialog(
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: new Text(
-                                'Details',
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                              content: Column(
-                                textDirection: TextDirection.ltr,
-                                children: [
-                                  Text(
-                                    "ID: ${map['id']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Author: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "title: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "post_date: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "body: ${map['author']}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.teal.shade600,
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
+                              title: new Text('Details & Comments',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 20.0,),),
+                              content:Row(
+                                children:[  new Column(
+                                    textDirection: TextDirection.ltr,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children:[
+                                      Text("ID: ${map['id']}",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 17.0,
+                                        ),
+                                      ),
 
-                                  new Padding(padding: EdgeInsets.all( 10.0)),
+                                      Text(
+                                        "Author: ${map['author']}",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 14.0,
+                                        ),
+                                      ),
+                                      Text(
+                                        "title: ${map['title']}",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 14.0,
+                                        ),
+                                      ),
+                                      Text(
+                                        "post_date: ${map['post_date']}",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 14.0,
+                                        ),
+                                      ),
+                                      Text(
+                                        "body: ${map['body']}",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 14.0,
+                                        ),
+                                      ),
 
-                                  Text(
-                                    "All Comments:",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.blue.shade600,
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
+                                      new Padding(padding: EdgeInsets.all( 10.0)),
 
-                                  for(var x = 0; x < comment.length; x++ )
-                                    Card(child: (
-                                        Text("${comment[x]['body']} By :${comment[x]['author']} ",
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            color: Colors.teal.shade600,
-                                            fontSize: 17.0,
-                                          ),
-                                        )
+                                      Text(
+                                        "All Comments:",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Colors.blue.shade600,
+                                          fontSize: 20.0,
+                                        ),
+                                      ),
 
-                                    ),
-                                    ),
+                                      for(var x = 0; x < comment.length; x++ )
+                                        Card(child: (
+                                            Text("${comment[x]['body']} By :${comment[x]['author']} ",
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                color: Theme.of(context).primaryColor,
+                                                fontSize: 17.0,
+                                              ),
+                                            )
+
+                                        ),
+                                        ),
+
+
+                                    ]
+                                ),
                                 ],
                               ),
+
+
                               actions: [
                                 FlatButton(
                                     onPressed: () {
                                       Navigator.pop(context);
+                                      print(comment[0]['body']);
                                     },
                                     child: new Text(
                                       'Ok',
@@ -303,6 +314,7 @@ class _Blog2State extends State<Blog2> {
       ),
 
     );
-
   }
 }
+
+

@@ -19,6 +19,7 @@ class _ServicesState extends State<Services> {
         title: Text(
           'Services Page',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22,
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),

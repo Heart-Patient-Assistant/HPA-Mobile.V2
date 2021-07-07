@@ -13,6 +13,7 @@ class _Meal9State extends State<Meal9> {
     return Scaffold(
       appBar: new AppBar(
         title: Text("Meal-3",style: TextStyle(
+            color: Theme.of(context).primaryColor,
             fontSize: 22,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold),

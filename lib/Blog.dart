@@ -37,7 +37,11 @@ class _BlogState extends State<Blog> {
         ),
       ),
 
-      appBar: AppBar( actions: [
+      appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
+        backgroundColor: Colors.teal.shade600,
+
+        actions: [
 
           // FlatButton.icon(
           //   label: Text(''),
@@ -74,7 +78,6 @@ class _BlogState extends State<Blog> {
             onPressed: null,
             icon: Icon(
               Icons.add_comment_rounded,
-              color: Colors.teal.shade600,
               size: 50,
             ),
           ),
@@ -97,7 +100,6 @@ class _BlogState extends State<Blog> {
 
         ],
 
-        backgroundColor: Colors.white,
       ),
 
 
@@ -119,7 +121,7 @@ class _BlogState extends State<Blog> {
                     title: new Text(
                       '${data[newPosition]['title']}',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                         fontSize: 22.0,
                       ),
                     ),
@@ -127,7 +129,7 @@ class _BlogState extends State<Blog> {
                     subtitle: new Text(
                       '${data[newPosition]['body']}',
                       style: TextStyle(
-                        color: Colors.black38,
+                        color: Theme.of(context).primaryColor,
                         fontSize: 14.0,
                       ),
                     ),
@@ -231,7 +233,7 @@ class _BlogState extends State<Blog> {
                                     Text("ID: ${map['id']}",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                        color: Colors.teal.shade600,
+                                        color: Theme.of(context).primaryColor,
                                         fontSize: 17.0,
                                       ),
                                     ),
@@ -240,31 +242,31 @@ class _BlogState extends State<Blog> {
                                       "Author: ${map['author']}",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                        color: Colors.teal.shade600,
+                                        color: Theme.of(context).primaryColor,
                                         fontSize: 14.0,
                                       ),
                                     ),
                                      Text(
-                                       "title: ${map['author']}",
+                                       "title: ${map['title']}",
                                        textAlign: TextAlign.left,
                                        style: TextStyle(
-                                         color: Colors.teal.shade600,
+                                         color: Theme.of(context).primaryColor,
                                          fontSize: 14.0,
                                        ),
                                      ),
                                      Text(
-                                       "post_date: ${map['author']}",
+                                       "post_date: ${map['post_date']}",
                                        textAlign: TextAlign.left,
                                        style: TextStyle(
-                                         color: Colors.teal.shade600,
+                                         color: Theme.of(context).primaryColor,
                                          fontSize: 14.0,
                                        ),
                                      ),
                                      Text(
-                                       "body: ${map['author']}",
+                                       "body: ${map['body']}",
                                        textAlign: TextAlign.left,
                                        style: TextStyle(
-                                         color: Colors.teal.shade600,
+                                         color: Theme.of(context).primaryColor,
                                          fontSize: 14.0,
                                        ),
                                      ),
@@ -285,7 +287,7 @@ class _BlogState extends State<Blog> {
                                       Text("${comment[x]['body']} By :${comment[x]['author']} ",
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                          color: Colors.teal.shade600,
+                                          color: Theme.of(context).primaryColor,
                                           fontSize: 17.0,
                                         ),
                                       )

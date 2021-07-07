@@ -47,6 +47,7 @@ class _FBState extends State<FB> {
           title: Text(
             'Contact Page',
             style: TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontSize: 22,
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.bold),

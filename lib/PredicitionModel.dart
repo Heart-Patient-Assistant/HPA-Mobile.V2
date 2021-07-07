@@ -95,11 +95,12 @@ class _PredictionModelState extends State<PredictionModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(
           'Predictions',
           style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontSize: 22,
               fontFamily: 'Raleway',
               fontWeight: FontWeight.bold),

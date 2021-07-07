@@ -48,7 +48,6 @@ class _LoginPageState extends State<LoginPage> {
      double h = MediaQuery.of(context).size.height;
      double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: (_futureLogin == null)
           ? new ListView(
               children: [
