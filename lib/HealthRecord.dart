@@ -6,12 +6,16 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Readings {
-  final String heartRate  ;
-  final String spo2  ;
-  Readings(this.heartRate , this.spo2);
+// class Readings {
+//   final String heartRate  ;
+//   final String spo2  ;
+//   Readings(this.heartRate , this.spo2);
+//
+// }
 
-}
+String sv1 ;
+String sv2 ;
+
 
 
 class HealthRecord extends StatefulWidget {
@@ -21,32 +25,31 @@ class HealthRecord extends StatefulWidget {
 }
 
 class _HealthRecordState extends State<HealthRecord> {
-  var _readingsJson = [ ];
+  // var _readingsJson = [ ];
 
-  getSensorsData ()async{
-    final response = await http.get(Uri.parse("https://mahdy.pythonanywhere.com/api/users/sensor/"),
-      headers: <String, String>{
-        'Content-Type': "application/json; charset=UTF-8",
-        "Vary": "Accept",
+  Future getSensorsData ()async {
+    for (var i = 1; i < 38; i++) {
+      final response = await http.get(
+        Uri.parse("https://mahdy.pythonanywhere.com/api/users/sensor/"),
+        headers: <String, String>{
+          'Content-Type': "application/json; charset=UTF-8",
+          "Vary": "Accept",
 
-      },
-    );
+        },
+      );
 
-    final jsonData = jsonDecode(response.body) ;
-    // List<Readings> readings = [];
-    //
-    // for (var u in jsonData){
-    //   Readings reading = Readings(u["HeartRate"], u["SpO2"]);
-    //   readings.add(reading);
-    // }
-    // print(readings.length);
-    // return readings ;
+      final jsonData = jsonDecode(response.body);
 
-    setState(() {
-      _readingsJson = jsonData ;
-    });
+      // List<String> readings = [];
 
 
+
+    // setState(() {
+      sv1 = jsonData[i]["HeartRate"];
+      sv2 = jsonData[i]["SpO2"];
+    // });
+
+  }
   }
   @override
   void initState() {
@@ -71,12 +74,12 @@ class _HealthRecordState extends State<HealthRecord> {
         ),
         backgroundColor: Colors.teal.shade600,
       ) ,
-      // body: ListView.builder(itemCount : _readingsJson.length,
+      // body: ListView.builder(itemCount : sv1.length,
       //     itemBuilder: (context,i){
-      //   final read = _readingsJson[i];
-      //   return Text("${read["HeartRate"]}");
-      //
-      //     })
+      //   final read = sv1[i];
+      //   return Text("${sv1[i]["HeartRate"].toString()}");
+
+          // })
       body: Center(
         child: Column(
           children: [
@@ -88,16 +91,17 @@ class _HealthRecordState extends State<HealthRecord> {
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.bold),
             ),
+            new Padding(padding: EdgeInsets.only(top:h*0.01)),
 
             ListTile(
               title: Text ('Heart Rate :'),
-              subtitle:Text('86'),
+              subtitle:Text("${sv1}"),
             ),
             new Padding(padding: EdgeInsets.only(top:h*0.01)),
 
             ListTile(
               title: Text ("Oxygen Level 'SpO2' :"),
-              subtitle:Text('95%'),
+              subtitle:Text("${sv2} %"),
             ),
           ],
         ),

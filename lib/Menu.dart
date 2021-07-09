@@ -166,7 +166,7 @@ class _MenuState extends State<Menu> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(top: 28.0, left: 112.5),
-                    child: Icon(Icons.settings_rounded),
+                    child: Icon(Icons.settings_rounded,color: Colors.black87,),
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 28, top: 10.0),
