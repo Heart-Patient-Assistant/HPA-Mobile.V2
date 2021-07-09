@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hp_assistant/PredicitionModel.dart';
 
 
 // class Readings {
@@ -15,7 +16,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String sv1 ;
 String sv2 ;
+var the_age;
 
+PredictionModel prediction = PredictionModel() ;
 
 
 class HealthRecord extends StatefulWidget {
@@ -50,7 +53,10 @@ class _HealthRecordState extends State<HealthRecord> {
     // });
 
   }
+
   }
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -81,27 +87,123 @@ class _HealthRecordState extends State<HealthRecord> {
 
           // })
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
-            new Padding(padding: EdgeInsets.only(top:h*0.03)),
+            Column(
+              children: [
+                new Padding(padding: EdgeInsets.only(top:h*0.03)),
 
-            new Text("Your Vital Readings",style: TextStyle(
-                color: Colors.teal,
-                fontSize: 22,
-                fontFamily: 'Raleway',
-                fontWeight: FontWeight.bold),
-            ),
-            new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                new Text("Your Vital Readings",style: TextStyle(
+                    color: Colors.teal,
+                    fontSize: 22,
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.bold),
+                ),
+                new Padding(padding: EdgeInsets.only(top:h*0.01)),
 
-            ListTile(
-              title: Text ('Heart Rate :'),
-              subtitle:Text("${sv1}"),
-            ),
-            new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                ListTile(
+                  title: Text ('Heart Rate :'),
+                  subtitle:Text("${sv1}"),
+                ),
+                new Padding(padding: EdgeInsets.only(top:h*0.01)),
 
-            ListTile(
-              title: Text ("Oxygen Level 'SpO2' :"),
-              subtitle:Text("${sv2} %"),
+                ListTile(
+                  title: Text ("Oxygen Level 'SpO2' :"),
+                  subtitle:Text("${sv2} %"),
+                ),
+                new Padding(padding: EdgeInsets.only(top:h*0.03)),
+
+                // new Text("Your Health Record",style: TextStyle(
+                //     color: Colors.teal,
+                //     fontSize: 22,
+                //     fontFamily: 'Raleway',
+                //     fontWeight: FontWeight.bold),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Age"),
+                //   subtitle:Text("${the_age}"),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Chest Pain"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Resting Blood Pressure"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Cholesterol"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Fasting Blood Sugar Level"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Resting Electrocardiographic Results"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("thalach"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("exang"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Old Peak"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Slope"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("ca"),
+                //   subtitle:Text(""),
+                // ),
+                // new Padding(padding: EdgeInsets.only(top:h*0.01)),
+                //
+                //
+                // ListTile(
+                //   title: Text ("Thallium Stress Result"),
+                //   subtitle:Text(""),
+                // ),
+              ],
             ),
           ],
         ),

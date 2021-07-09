@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:hp_assistant/HealthRecord.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+import 'package:hp_assistant/HealthRecord.dart';
 
+int radioGroup = 2;
 
 class PredictionModel extends StatefulWidget {
 
@@ -13,7 +16,6 @@ class PredictionModel extends StatefulWidget {
 class _PredictionModelState extends State<PredictionModel> {
 
   var status ;
-  int radioGroup = 2;
 
 
   void radioEventHandler(int value) {
@@ -40,6 +42,7 @@ class _PredictionModelState extends State<PredictionModel> {
 
 
   Future Predict( ) async {
+    the_age = age ;
 
     int varAge =int.parse(age.text);
     // int varSex =int.parse(sex.text);
@@ -91,6 +94,7 @@ class _PredictionModelState extends State<PredictionModel> {
         return AlertDialog(content: Text("${data['prediction']} ..... ${data['worry']}"),actions: [FlatButton(onPressed: (){Navigator.pop(context);}, child: Text("Ok"))],);
       });
     }
+
   }
   @override
   Widget build(BuildContext context) {
@@ -122,6 +126,7 @@ class _PredictionModelState extends State<PredictionModel> {
                   labelText: 'Age',
                   icon: new Icon(Icons.circle),
                 ),
+
               ),
             ),
             new Padding(
@@ -308,6 +313,7 @@ class _PredictionModelState extends State<PredictionModel> {
                 child: new Row(
                   children: [
                     new Radio(
+                      activeColor: Colors.black87,
                       value: 1,
                       groupValue: radioGroup,
                       onChanged: radioEventHandler,
@@ -315,6 +321,7 @@ class _PredictionModelState extends State<PredictionModel> {
                     new Text("Male"),
                     new Padding(padding: EdgeInsets.only(right:15.0)),
                     new Radio(
+                      activeColor: Colors.black87,
                       value: 0,
                       groupValue: radioGroup,
                       onChanged: radioEventHandler,
@@ -329,7 +336,70 @@ class _PredictionModelState extends State<PredictionModel> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () {
-                Predict();
+                if(age.text.trim().isEmpty ||
+                    cp.text.trim().isEmpty ||
+                    ca.text.trim().isEmpty ||
+                    chol.text.trim().isEmpty ||
+                    exang.text.trim().isEmpty ||
+                    fbs.text.trim().isEmpty ||
+                    oldpeak.text.trim().isEmpty ||
+                    restecg.text.trim().isEmpty ||
+                    thal.text.trim().isEmpty ||
+                    thalach.text.trim().isEmpty ||
+                    slope.text.trim().isEmpty ||
+                    trestbps.text.trim().isEmpty ){
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: new Text(
+                            'ERROR',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          content: Text(
+                              "Please complete your data."),
+                          actions: [
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  'Ok',
+                                  style: TextStyle(color: Colors.blue),
+                                ))
+                          ],
+                        );
+                      });
+
+                }else if (radioGroup != 0 && radioGroup != 1){
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: new Text(
+                            'ERROR',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          content: Text(
+                              "Please choose your type."),
+                          actions: [
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: new Text(
+                                  'Ok',
+                                  style: TextStyle(color: Colors.blue),
+                                ))
+                          ],
+                        );
+                      });
+                }
+                else {
+                  Predict();
+                  return age ;
+
+                }
               },
               child: Text(
                 "Predict",
