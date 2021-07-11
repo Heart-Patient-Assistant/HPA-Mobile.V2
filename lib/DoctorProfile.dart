@@ -30,7 +30,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
   void initState() {
     super.initState();
     loadImage();
-    databaseHelper.getData();
+
   }
 
   Widget bottomSheet() {

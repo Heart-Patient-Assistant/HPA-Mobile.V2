@@ -373,13 +373,15 @@ class _EditProfileState extends State<EditProfile> {
           year.text.trim().isNotEmpty ){
         setState(() {
           int day2 =int.parse(day.text.toString());
+          int month22 =0;
           int month2 =int.parse(month.text.toString());
           int year2 =int.parse(year.text.toString());
-          birthDate=(year2.toString()+'-'+month2.toString()+'-'+day2.toString());
+          birthDate=(year2.toString()+'-'+month22.toString()+month2.toString()+'-'+day2.toString());
           setState(() {
             databaseHelper.editData(
-                birthDate.trim(),
                 location.text.trim(),
+                birthDate.trim(),
+
             );
           });
           Navigator.of(context).pop(new MaterialPageRoute(

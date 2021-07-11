@@ -28,7 +28,6 @@ class _PatientProfileState extends State<PatientProfile> {
   void initState() {
     super.initState();
     loadImage();
-    databaseHelper.getData();
   }
 
   Widget bottomSheet() {

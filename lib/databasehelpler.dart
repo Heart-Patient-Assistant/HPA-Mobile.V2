@@ -156,7 +156,7 @@ class DatabaseHelper {
   }
 
 
-  Future<String> editData(String birthDate, String location,) async {
+  Future<editD> editData(String location,String birthDate, ) async {
        print(token);
     final response = await http.post(
         Uri.parse("https://mahdy.pythonanywhere.com/api/users/editprofile/"),
@@ -165,17 +165,15 @@ class DatabaseHelper {
           'Authorization': 'Token $token',
         },
         body: jsonEncode(<String, String>{
+          "Location": "$location",
           "birth_date": "$birthDate",
-          "location": "$location",
         }));
     print('Response status : ${response.statusCode}');
     print('Response body : ${response.body}');
-    // print(' body : ${ jsonEncode(<String, String>{
-    //   "birth_date": "$birthDate",
-    //   "location": "$location",
-    // })}');
-       return json.decode(response.body) ;
-
+    print(' body : ${ jsonEncode(<String, String>{
+      "Location": "$location",
+      "birth_date": "$birthDate",
+    })}');
   }
 
 
@@ -231,29 +229,6 @@ class DatabaseHelper {
 
   }
 
-
-  Future<Map> getData() async {
-    final response = await http.get(
-        Uri.parse("https://mahdy.pythonanywhere.com/api/users/getprofile/"),
-        headers: <String, String>{
-          'Content-Type': "application/json; charset=UTF-8",
-          'Authorization': 'Token $token',
-          "Vary": "Accept",
-
-        },
-        );
-    if (response.statusCode==200){
-      dataUser = response.body;
-      return dataUser;
-    }
-    // var data = response.body;
-    // print('The Data : ${data}');
-    // print('Response status for user : ${response.statusCode}');
-    // print('Response body for user : ${}');
-    // return jsonDecode(response.body);
-
-
-  }
 
   _save(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -327,64 +302,19 @@ class Login {
 }
 
 class editD {
-  final   String user;
-  final   String bio;
-  final   String profilePic;
-  final   String facebookUrl;
-  final   String twitterUrl;
-  final   String instagramUrl;
-  final   String academicTitle;
-  final   String speciality;
-  final   String employmentHistory;
-  final   String experience;
-  final   String phoneNumber;
-  final   String birthDate;
   final   String location;
+  final   String birthDate;
 
-  editD({this.user, this.bio,this.profilePic, this.facebookUrl,this.twitterUrl, this.instagramUrl,this.academicTitle,
-    this.speciality,this.employmentHistory, this.experience,this.phoneNumber, this.birthDate,this.location,});
+  editD({this.location,this.birthDate,});
   factory editD.fromJson(Map<String, dynamic> json) {
     return editD(
-      user: json['user'],
-      bio: json['bio'],
-      profilePic: json['profilePic'],
-      facebookUrl: json['facebookUrl'],
-      twitterUrl: json['twitterUrl'],
-      instagramUrl: json['instagramUrl'],
-      academicTitle: json['academicTitle'],
-      speciality: json['speciality'],
-      employmentHistory: json['employmentHistory'],
-      experience: json['experience'],
-      phoneNumber: json['phoneNumber'],
-      birthDate: json['birthDate'],
-      location: json['location'],
+      birthDate: json['birth_date'],
+      location: json['Location'],
 
     );
   }
 }
 
-class getD {
-  final   String email;
-  final   String firstName;
-  final   String lastName;
-  final   String location;
-  final   String bio;
-  final   String webUrl;
-  final   String birthDate;
-
-  getD({this.email, this.firstName,this.lastName, this.location,this.bio, this.webUrl,this.birthDate});
-  factory getD.fromJson(Map<String, dynamic> json) {
-    return getD(
-      email: json['email'],
-      firstName: json['first_name'],
-      lastName: json['lastName'],
-      location: json['location'],
-      bio: json['bio'],
-      webUrl: json['webUrl'],
-      birthDate: json['birthDate'],
-    );
-  }
-}
 
 class newPost {
   final String title;
