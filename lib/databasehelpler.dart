@@ -123,7 +123,7 @@ class DatabaseHelper {
    return json.decode(response.body) ;
   }
 
-  Future<Map> createCommentData (int id) async {
+  Future<Map> createCommentData (int id , String body) async {
     final response = await http.post(
         Uri.parse(
             "https://mahdy.pythonanywhere.com/api/blog/posts/$id/comments/"),
@@ -133,7 +133,7 @@ class DatabaseHelper {
           "Vary": "Accept",
         },
         body: jsonEncode(<String, String>{
-          "body": "body",
+          "body": "$body",
         }));
     print(response.statusCode);
     print(response.body);

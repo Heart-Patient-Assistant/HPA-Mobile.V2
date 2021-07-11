@@ -184,9 +184,9 @@ class _BlogState extends State<Blog> {
                                                 );
                                               });
                                         } else {
-                                          print(_textController);
+                                          print(_textController.text);
                                           setState(() {
-                                            databaseHelper.createCommentData(data[newPosition]['id']);
+                                            databaseHelper.createCommentData(data[newPosition]['id'], "${_textController.text}");
                                             _textController.clear();
                                             Navigator.pop(context);
                                           });
@@ -231,8 +231,10 @@ class _BlogState extends State<Blog> {
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 20.0,),),
-                              content:Row(
-                                children:[  new Column(
+                              content:
+                              Row(
+                                children:[
+                                  Expanded(child: new Column(
                                   textDirection: TextDirection.ltr,
                                   mainAxisSize: MainAxisSize.min,
                                    children:[
@@ -290,7 +292,7 @@ class _BlogState extends State<Blog> {
 
                                 for(var x = 0; x < comment.length; x++ )
                                   Card(child: (
-                                      Text("${comment[x]['body']} By :${comment[x]['author']} ",
+                                      Text("${comment[x]["body"]} By :${comment[x]['author']} ",
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           color: Theme.of(context).primaryColor,
@@ -304,15 +306,17 @@ class _BlogState extends State<Blog> {
 
                                          ]
                                   ),
+                                  ),
                                  ],
                                 ),
+
 
 
                               actions: [
                                 FlatButton(
                                     onPressed: () {
                                       Navigator.pop(context);
-                                      print(comment[0]['body']);
+                                      //print(comment[0]['body']);
                                     },
                                     child: new Text(
                                       'Ok',

@@ -169,10 +169,10 @@ class _Blog2State extends State<Blog2> {
                                               );
                                               });
                                         } else {
-                                          print(_textController);
+                                          print(_textController.text);
                                           setState(() {
                                             databaseHelper.createCommentData(
-                                                data[newPosition]['id']);
+                                                data[newPosition]['id'],"${_textController.text}");
                                             _textController.clear();
                                             Navigator.pop(context);
                                           }
