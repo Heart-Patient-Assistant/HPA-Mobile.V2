@@ -108,63 +108,64 @@ class _PatientProfileState extends State<PatientProfile> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: Theme.of(context).iconTheme,
-          backgroundColor: Colors.teal.shade600,
-          actions: [
-            // ChangeThemeButtonWidget(),
-            // FlatButton.icon(
-            //   label: Text(''),
-            //   onPressed: () {
-            //     Navigator.pushAndRemoveUntil(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (BuildContext context) => HomePage()),
-            //       ModalRoute.withName('/HomePage'),
-            //     );
-            //   },
-            //   icon: Icon(Icons.home_rounded,
-            //   ),
-            // ),
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: null,
-              icon: Icon(
-                Icons.account_circle_rounded,
-                size: 50,
-              ),
+      appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
+        backgroundColor: Colors.teal.shade600,
+        actions: [
+          // ChangeThemeButtonWidget(),
+          // FlatButton.icon(
+          //   label: Text(''),
+          //   onPressed: () {
+          //     Navigator.pushAndRemoveUntil(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (BuildContext context) => HomePage()),
+          //       ModalRoute.withName('/HomePage'),
+          //     );
+          //   },
+          //   icon: Icon(Icons.home_rounded,
+          //   ),
+          // ),
+          FlatButton.icon(
+            label: Text(''),
+            onPressed: null,
+            icon: Icon(
+              Icons.account_circle_rounded,
+              size: 50,
             ),
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext context) => Blog()),
-                  ModalRoute.withName('/Blog'),
-                );
-              },
-              icon: Icon(
-                Icons.add_comment_rounded,
-              ),
+          ),
+          FlatButton.icon(
+            label: Text(''),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) => Blog()),
+                ModalRoute.withName('/Blog'),
+              );
+            },
+            icon: Icon(
+              Icons.add_comment_rounded,
             ),
-            FlatButton.icon(
-              label: Text(''),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext context) => Menu()),
-                  ModalRoute.withName('/Menu'),
-                );
-              },
-              icon: Icon(
-                Icons.menu_rounded,
-              ),
+          ),
+          FlatButton.icon(
+            label: Text(''),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) => Menu()),
+                ModalRoute.withName('/Menu'),
+              );
+            },
+            icon: Icon(
+              Icons.menu_rounded,
             ),
-            new Padding(padding: EdgeInsets.only(right: w * 0.15)),
-            ChangeThemeButtonWidget(),
-          ],
-        ),
-        body: new Center(child:Column(
+          ),
+          new Padding(padding: EdgeInsets.only(right: w * 0.15)),
+          ChangeThemeButtonWidget(),
+        ],
+      ),
+      body: new Center(
+        child: Column(
           children: [
             new Padding(padding: EdgeInsets.only(top: 30.0)),
             new Stack(
@@ -212,7 +213,64 @@ class _PatientProfileState extends State<PatientProfile> {
               height: 20,
             ),
 
-           
+            Expanded(
+              child: FutureBuilder(
+                future: databaseHelper.showData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  final Map data = snapshot.data;
+                  print("pppp: ${data.length}");
+                  print(data);
+                  //String em = data['email'];
+                  return new Container(
+                    child:
+
+                    new Column(children: [
+
+
+                      new Text(
+                        'First Name: ${data["first_name"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Last Name: ${data["last_name"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Email: ${data['email']}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Location: ${data["location"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Bio: ${data["bio"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                    ]),
+
+                  );
+                },
+              ),
+            ),
 
             // new Container(
             //   alignment: Alignment.center,
@@ -269,7 +327,7 @@ class _PatientProfileState extends State<PatientProfile> {
             // ),
           ],
         ),
-        ),
+      ),
     );
   }
 }

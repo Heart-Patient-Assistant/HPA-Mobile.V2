@@ -202,52 +202,62 @@ class _DoctorProfileState extends State<DoctorProfile> {
               child: Text("Save Picture"),
             ),
             SizedBox(height: 73,),
-            new Container(
-              alignment: Alignment.center,
-              child: Text(
-                'Name : ',
-//    ${dataUser["first_name"]}
-                style: TextStyle(
-                  fontSize: 22,
-                  fontFamily: 'Raleway',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 20,),
-            new Container(
-              alignment: Alignment.center,
-              child: Text(
-                'Email :',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontFamily: 'Raleway',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 20,),
-            new Container(
-              alignment: Alignment.center,
-              child: Text(
-                'Location :',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontFamily: 'Raleway',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 20,),
-            new Container(
-              alignment: Alignment.center,
-              child: Text(
-                'Bio :',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontFamily: 'Raleway',
-                  fontWeight: FontWeight.bold,
-                ),
+            Expanded(
+              child: FutureBuilder(
+                future: databaseHelper.showData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  final Map data = snapshot.data;
+                  print("pppp: ${data.length}");
+                  print(data);
+                  //String em = data['email'];
+                  return new Container(
+                    child:
+
+                    new Column(children: [
+
+
+                      new Text(
+                        'First Name: ${data["first_name"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Last Name: ${data["last_name"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Email: ${data['email']}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Location: ${data["location"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        'Bio: ${data["bio"]}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                    ]),
+
+                  );
+                },
               ),
             ),
 
