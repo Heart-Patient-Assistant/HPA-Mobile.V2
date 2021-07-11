@@ -170,11 +170,49 @@ class DatabaseHelper {
         }));
     print('Response status : ${response.statusCode}');
     print('Response body : ${response.body}');
-    print(' body : ${ jsonEncode(<String, String>{
-      "birth_date": "$birthDate",
-      "location": "$location",
-    })}');
+    // print(' body : ${ jsonEncode(<String, String>{
+    //   "birth_date": "$birthDate",
+    //   "location": "$location",
+    // })}');
+       return json.decode(response.body) ;
+
   }
+
+
+  Future<Map> showData() async {
+    print(token);
+    final response = await http.get(
+        Uri.parse("https://mahdy.pythonanywhere.com/api/users/getprofile/"),
+        headers: <String, String>{
+         // 'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Token $token',
+        },);
+
+
+    print(response.statusCode);
+    print(response.body);
+    return json.decode(response.body) ;
+
+  }
+
+  Future<List> searchh(String text) async {
+    print(token);
+    final response = await http.get(
+      Uri.parse("http://127.0.0.1:8000/api/blog/?q=$text"),
+      headers: <String, String>{
+         'Content-Type': 'application/json; charset=UTF-8',
+        "Vary": "Accept",
+        //'Authorization': 'Token $token',
+      },);
+
+
+    print(response.statusCode);
+    print(response.body);
+    return json.decode(response.body) ;
+
+  }
+
+
 
 
   Future<FB> FbData(String rate, String feedbackCategory, String msg) async {

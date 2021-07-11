@@ -5,10 +5,13 @@ import 'package:hp_assistant/EditProfile.dart';
 import 'package:hp_assistant/EditPassword.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/LoginPage.dart';
+import 'package:hp_assistant/databasehelpler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Menu extends StatefulWidget {
-  final List<String> list = List();
+
   @override
   _MenuState createState() => _MenuState();
 }
@@ -32,12 +35,17 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
+
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
     return Scaffold(
+
         appBar: AppBar(
+
           iconTheme: Theme.of(context).iconTheme,
           backgroundColor: Colors.teal.shade600,
+
           actions: [
             // FlatButton.icon(
             //   label: Text(''),
@@ -53,8 +61,10 @@ class _MenuState extends State<Menu> {
             //     Icons.home_rounded,
             //   ),
             // ),
+
             FlatButton.icon(
-              label: Text(''),
+              label:
+              Text(''),
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
@@ -63,12 +73,17 @@ class _MenuState extends State<Menu> {
                   ModalRoute.withName('/PatientProfile'),
                 );
               },
-              icon: Icon(
+
+              icon:
+              Icon(
                 Icons.account_circle_rounded,
               ),
             ),
+
+
             FlatButton.icon(
               label: Text(''),
+
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
@@ -76,25 +91,39 @@ class _MenuState extends State<Menu> {
                   ModalRoute.withName('/Blog'),
                 );
               },
-              icon: Icon(
+
+              icon:
+              Icon(
                 Icons.add_comment_rounded,
               ),
             ),
+
+
             FlatButton.icon(
               label: Text(''),
-              onPressed: null,
-              icon: Icon(
-                Icons.menu_rounded,
 
+              onPressed: null,
+              icon:
+              Icon(
+                Icons.menu_rounded,
                 size: 50,
               ),
-            ),
-            new Padding(padding: EdgeInsets.only(right: w * 0.15)),
-          ],
 
+            ),
+
+
+            new Padding(padding: EdgeInsets.only(right: w * 0.15)),
+
+          ],
         ),
-        body: new ListView(children: [
+
+
+        body:
+        new ListView(
+            children: [
+
           new Column(
+
             children: [
               new Padding(padding: EdgeInsets.only(top: h * 0.02)),
               new FlatButton.icon(
@@ -102,9 +131,14 @@ class _MenuState extends State<Menu> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
                 onPressed: () {
-                  showSearch(context: context, delegate: Searchh(widget.list));
+                  // showSearch(context: context, delegate: Searchh(widget.list));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SeerachBar(),
+                  ));
                 },
-                icon: Icon(Icons.search_rounded),
+
+                icon:
+                Icon(Icons.search_rounded),
                 label: Text(
                   'S e a r c h     ',
                   style: TextStyle(
@@ -113,14 +147,20 @@ class _MenuState extends State<Menu> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+
+
               new FlatButton.icon(
                 height: 80,
+
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
+
                 onPressed: () {
                   Navigator.of(context).pushNamed('/Services');
                 },
+
                 icon: Icon(Icons.medical_services_rounded),
+
                 label: Text(
                   'S e r v i c e s',
                   style: TextStyle(
@@ -128,15 +168,22 @@ class _MenuState extends State<Menu> {
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold),
                 ),
+
               ),
+
+
               new FlatButton.icon(
                 height: 80,
+
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
+
                 onPressed: () {
                   Navigator.of(context).pushNamed('/About');
                 },
+
                 icon: Icon(Icons.contact_support_rounded),
+
                 label: Text(
                   'A b o u t  U s      ',
                   style: TextStyle(
@@ -145,14 +192,20 @@ class _MenuState extends State<Menu> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+
+
               new FlatButton.icon(
                 height: 80,
+
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
+
                 onPressed: () {
                   Navigator.of(context).pushNamed('/Contact');
                 },
+
                 icon: Icon(Icons.send_rounded),
+
                 label: Text(
                   'C o n t a c t ',
                   style: TextStyle(
@@ -166,7 +219,10 @@ class _MenuState extends State<Menu> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(top: 28.0, left: 112.5),
-                    child: Icon(Icons.settings_rounded,color: Colors.black87,),
+                    child: Icon(
+                      Icons.settings_rounded,
+                      color: Colors.black87,
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 28, top: 10.0),
@@ -229,15 +285,19 @@ class _MenuState extends State<Menu> {
               // ),
               new FlatButton.icon(
                 height: 70,
+
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
+
                 onPressed: () {
                   _save('0');
                   Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => new LoginPage(),
                   ));
                 },
+
                 icon: Icon(Icons.logout),
+
                 label: Text(
                   'L o g  o u t ',
                   style: TextStyle(
@@ -246,70 +306,79 @@ class _MenuState extends State<Menu> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+
             ],
           ),
         ]));
   }
 }
 
-class Searchh extends SearchDelegate {
+class SeerachBar extends StatefulWidget {
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return <Widget>[
-      IconButton(
-        icon: Icon(Icons.close),
-        onPressed: () {
-          query = "";
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-  }
-
-  String selectedResult;
-  @override
-  Widget buildResults(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(selectedResult),
-      ),
-    );
-  }
-
-  final List<String> listExample;
-  Searchh(this.listExample);
-  List<String> recentList = ["", ""];
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> suggestionList = [];
-    query.isEmpty
-        ? suggestionList = recentList
-        : suggestionList.addAll(listExample.where(
-            (element) => element.contains(query),
-          ));
-
-    return ListView.builder(
-      itemCount: suggestionList.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            suggestionList[index],
-          ),
-          onTap: () {
-            selectedResult = suggestionList[index];
-            showResults(context);
-          },
-        );
-      },
-    );
-  }
+  _SeerachBarState createState() => _SeerachBarState();
 }
+
+class _SeerachBarState extends State<SeerachBar> {
+  List data = [];
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+
+      body: SafeArea(
+
+        child: Column(
+
+          children: [
+            Row(
+              children: [
+
+
+                IconButton(
+                  icon:
+                  Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+
+
+                Expanded(
+                  child:
+                  TextField(
+                    onChanged: (String text) async {
+                      print(text);
+                      List d = await DatabaseHelper().searchh(text);
+                      setState(() {
+                        data = d;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+
+
+            if (data.isNotEmpty)
+              Expanded(
+                child:
+                ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (_, i) {
+                    return Text(data[i]['author']);
+                  },
+                ),
+              )
+
+          ],
+        ),
+
+      ),
+
+    );
+
+  }
+
+}
+

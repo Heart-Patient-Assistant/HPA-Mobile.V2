@@ -7,9 +7,13 @@ import 'package:hp_assistant/Menu.dart';
 import 'PatientProfile.dart';
 import 'databasehelpler.dart';
 
+
 class Blog extends StatefulWidget {
+
+
   @override
   _BlogState createState() => _BlogState();
+
 }
 
 class _BlogState extends State<Blog> {
@@ -113,11 +117,13 @@ class _BlogState extends State<Blog> {
           }
           List data = snapshot.data;
           print(data.length);
+
           return new ListView.separated(
               separatorBuilder: (context, index) => Divider(),
               itemCount: data.length,
               itemBuilder: (BuildContext context, int newPosition) {
                 return new ListTile(
+
                     title: new Text(
                       '${data[newPosition]['title']}',
                       style: TextStyle(

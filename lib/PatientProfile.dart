@@ -18,7 +18,6 @@ class PatientProfile extends StatefulWidget {
 }
 
 class _PatientProfileState extends State<PatientProfile> {
-
   PickedFile _imageFile;
   final ImagePicker picker = ImagePicker();
   String _imagePath;
@@ -165,107 +164,112 @@ class _PatientProfileState extends State<PatientProfile> {
             ChangeThemeButtonWidget(),
           ],
         ),
-        body:  new Column(
-              children: [
-                new Padding(padding: EdgeInsets.only(top: 30.0)),
-                new Stack(
-                  children: <Widget>[
-                    _imagePath != null
-                        ? CircleAvatar(
-                      backgroundImage: FileImage(File(_imagePath)),
-                      backgroundColor: Theme
-                          .of(context)
-                          .iconTheme
-                          .color,
-                      radius: 70,
-                    )
-                        : CircleAvatar(
-                      backgroundColor:
-                      Theme
-                          .of(context)
-                          .scaffoldBackgroundColor,
-
-                      backgroundImage: _imageFile == null
-                          ? AssetImage('img/Icon0.png')
-                          : FileImage(File(_imageFile.path)),
-                      radius: 70,
-
-                      child: Container(
-                        padding: EdgeInsets.only(top: 100.0, left: 90.0),
-                        child: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: ((builder) => bottomSheet()));
-                          },
-                          child: Icon(
-                            Icons.camera_alt_outlined,
-                            color: Colors.black54,
+        body: new Center(child:Column(
+          children: [
+            new Padding(padding: EdgeInsets.only(top: 30.0)),
+            new Stack(
+              children: <Widget>[
+                _imagePath != null
+                    ? CircleAvatar(
+                        backgroundImage: FileImage(File(_imagePath)),
+                        backgroundColor: Theme.of(context).iconTheme.color,
+                        radius: 70,
+                      )
+                    : CircleAvatar(
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        backgroundImage: _imageFile == null
+                            ? AssetImage('img/Icon0.png')
+                            : FileImage(File(_imageFile.path)),
+                        radius: 70,
+                        child: Container(
+                          padding: EdgeInsets.only(top: 100.0, left: 90.0),
+                          child: InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: ((builder) => bottomSheet()));
+                            },
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              color: Colors.black54,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20,),
-                new ElevatedButton(
-                  onPressed: () {
-                    saveImage(_imageFile.path);
-                  },
-                  child: Text("Save Picture"),
-                ),
-                SizedBox(height: 73,),
-                new Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Name : ',
-//    ${dataUser["first_name"]}
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                new Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Email :',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                new Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Location :',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                new Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Bio :',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            new ElevatedButton(
+              onPressed: () {
+                saveImage(_imageFile.path);
+              },
+              child: Text("Save Picture"),
+            ),
+            SizedBox(
+              height: 20,
+            ),
 
+           
+
+            // new Container(
+            //   alignment: Alignment.center,
+            //   child: Text(
+            //     'Name : ',
+            //     style: TextStyle(
+            //       fontSize: 22,
+            //       fontFamily: 'Raleway',
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // new Container(
+            //   alignment: Alignment.center,
+            //   child: Text(
+            //     'Email :',
+            //     style: TextStyle(
+            //       fontSize: 22,
+            //       fontFamily: 'Raleway',
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // new Container(
+            //   alignment: Alignment.center,
+            //   child: Text(
+            //     'Location :',
+            //     style: TextStyle(
+            //       fontSize: 22,
+            //       fontFamily: 'Raleway',
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // new Container(
+            //   alignment: Alignment.center,
+            //   child: Text(
+            //     'Bio :',
+            //     style: TextStyle(
+            //       fontSize: 22,
+            //       fontFamily: 'Raleway',
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
+        ),
     );
   }
 }
