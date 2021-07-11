@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/Menu.dart';
+import 'package:hp_assistant/databasehelpler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Blog2.dart';
@@ -23,11 +24,13 @@ class _DoctorProfileState extends State<DoctorProfile> {
   PickedFile _imageFile2;
   final ImagePicker picker2 = ImagePicker();
   String _imagePath2;
+  DatabaseHelper databaseHelper = new DatabaseHelper();
 
   @override
   void initState() {
     super.initState();
     loadImage();
+    databaseHelper.getData();
   }
 
   Widget bottomSheet() {
@@ -159,7 +162,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
         ),
         body: new Column(
           children: [
-            new Padding(padding: EdgeInsets.only(top: 40.0)),
+            new Padding(padding: EdgeInsets.only(top: 30.0)),
             new Stack(
                 alignment: Alignment.center,
                 children: [
@@ -191,31 +194,63 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           ),
                         )
                 ]),
-            new Padding(padding: EdgeInsets.all(10.0)),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                new Text(
-                  "Doctor's Name",
-                  style: TextStyle(fontSize: 20.0, fontStyle: FontStyle.italic),
-                ),
-              ],
-            ),
-            new Padding(padding: EdgeInsets.all(20.0)),
-            new Card(
-              child: new Column(
-                children: [
-                  new Text("Medical Degree:"),
-                ],
-              ),
-            ),
-            new Padding(padding: EdgeInsets.all(20.0)),
+            SizedBox(height: 20,),
             new ElevatedButton(
               onPressed: () {
                 saveImage(_imageFile2.path);
               },
               child: Text("Save Picture"),
-            )
+            ),
+            SizedBox(height: 73,),
+            new Container(
+              alignment: Alignment.center,
+              child: Text(
+                'Name : ',
+//    ${dataUser["first_name"]}
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            new Container(
+              alignment: Alignment.center,
+              child: Text(
+                'Email :',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            new Container(
+              alignment: Alignment.center,
+              child: Text(
+                'Location :',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            new Container(
+              alignment: Alignment.center,
+              child: Text(
+                'Bio :',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
           ],
         ));
   }

@@ -1,10 +1,13 @@
 import 'package:hp_assistant/newPost.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
 
 String type;
 String token= "0";
+var dataUser;
 
 class DatabaseHelper {
   var status;
@@ -30,7 +33,7 @@ class DatabaseHelper {
     var data = json.decode(response.body);
     token = data["token"];
     print('data : ${data["token"]}' );
-    print('token: $token');
+    print(' token: $token');
 
     if (status = response.body.contains('non_field_errors')) {
       print('data : ${data["non_field_errors"]}');
@@ -50,13 +53,12 @@ class DatabaseHelper {
             <String, String>{"username": "$email", "password": "$password"}));
 
     print(response.statusCode);
-    print(response.body.contains("DOCTOR"));
     print(response.body);
 
     var data = json.decode(response.body);
     token = data["token"];
     print('data : ${data["token"]}' );
-    print('token: $token');
+    print('saved token: $token');
 
 
     if (response.body.contains('DOCTOR')) {
@@ -75,7 +77,7 @@ class DatabaseHelper {
     if (status = response.body.contains('non_field_errors')) {
       print('data : ${data["non_field_errors"]}');
     } else {
-      print('data : ${data["token"]}');
+      print('saved data : ${data["token"]}');
       _save(data["token"]);
     }
   }
@@ -98,24 +100,17 @@ class DatabaseHelper {
   }
 
   Future<List> getPostData () async {
-
     final response = await http.get(
       Uri.parse("https://mahdy.pythonanywhere.com/api/blog/"),
       headers: <String, String>{
         'Content-Type': "application/json; charset=UTF-8",
         "Vary": "Accept",
       },);
-
-
     return json.decode(response.body) ;
-    print(response.statusCode);
-    print(response.body);
-
   }
 
 
   Future<Map> getDPostData (int id) async {
-
     final response = await http.get(
       Uri.parse("https://mahdy.pythonanywhere.com/api/blog/posts/$id/"),
       headers: <String, String>{
@@ -125,9 +120,7 @@ class DatabaseHelper {
 
     print(response.statusCode);
     print(response.body);
-
    return json.decode(response.body) ;
-
   }
 
   Future<Map> createCommentData (int id) async {
@@ -138,22 +131,17 @@ class DatabaseHelper {
           'Content-Type': "application/json; charset=UTF-8",
           "Authorization": "Token $token",
           "Vary": "Accept",
-
         },
         body: jsonEncode(<String, String>{
           "body": "body",
         }));
-
     print(response.statusCode);
     print(response.body);
-
     return json.decode(response.body) ;
 
   }
 
-
   Future<List> getCommentData (int id) async {
-
     final response = await http.get(
       Uri.parse("https://mahdy.pythonanywhere.com/api/blog/posts/$id/comments/"),
       headers: <String, String>{
@@ -163,21 +151,12 @@ class DatabaseHelper {
 
     print(response.statusCode);
     print(response.body);
-
-
       return json.decode(response.body) ;
-    //}
-
-
-
 
   }
 
 
-
-
-  Future<String> editData(String user, String bio,String profilePic,String facebookUrl, String twitterUrl,String instagramUrl, String academicTitle,
-      String speciality, String employmentHistory,String experience, String phoneNumber,String birthDate, String location,) async {
+  Future<String> editData(String birthDate, String location,) async {
        print(token);
     final response = await http.post(
         Uri.parse("https://mahdy.pythonanywhere.com/api/users/editprofile/"),
@@ -186,17 +165,6 @@ class DatabaseHelper {
           'Authorization': 'Token $token',
         },
         body: jsonEncode(<String, String>{
-          "user": "$user",
-          "bio": "$bio",
-          "profilePic": "$profilePic",
-          "facebookUrl": "$facebookUrl",
-          "twitterUrl": "$twitterUrl",
-          "instagramUrl": "$instagramUrl",
-          "academicTitle": "$academicTitle",
-          "speciality": "$speciality",
-          "employmentHistory": "$employmentHistory",
-          "experience": "$experience",
-          "phoneNumber": "$phoneNumber",
           "birth_date": "$birthDate",
           "location": "$location",
 
@@ -219,19 +187,31 @@ class DatabaseHelper {
         }));
     print(response.statusCode);
     print(response.body);
+
   }
 
 
-  Future<getD> getData(String email,String firstName,String lastName,String location,String bio,String webUrl,String birthDate,) async {
+  Future<Map> getData() async {
     final response = await http.get(
-        Uri.parse("https://mahdy.pythonanywhere.com/api/users/"),
+        Uri.parse("https://mahdy.pythonanywhere.com/api/users/getprofile/"),
         headers: <String, String>{
           'Content-Type': "application/json; charset=UTF-8",
           'Authorization': 'Token $token',
+          "Vary": "Accept",
+
         },
         );
-    print('Response status : ${response.statusCode}');
-    print('Response body : ${response.body}');
+    if (response.statusCode==200){
+      dataUser = response.body;
+      return dataUser;
+    }
+    // var data = response.body;
+    // print('The Data : ${data}');
+    // print('Response status for user : ${response.statusCode}');
+    // print('Response body for user : ${}');
+    // return jsonDecode(response.body);
+
+
   }
 
   _save(String token) async {
@@ -355,7 +335,7 @@ class getD {
   factory getD.fromJson(Map<String, dynamic> json) {
     return getD(
       email: json['email'],
-      firstName: json['firstName'],
+      firstName: json['first_name'],
       lastName: json['lastName'],
       location: json['location'],
       bio: json['bio'],

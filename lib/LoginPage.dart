@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hp_assistant/Blog2.dart';
 import 'package:hp_assistant/DoctorProfile.dart';
 import 'package:hp_assistant/HomePage.dart';
 import 'package:hp_assistant/PatientProfile.dart';
 import 'package:hp_assistant/databasehelpler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'DoctorProfile.dart';
-import 'DoctorProfile.dart';
-import 'PatientProfile.dart';
 import 'PatientProfile.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,9 +20,22 @@ class _LoginPageState extends State<LoginPage> {
     final key = 'token';
     final value = prefs.get(key) ?? "0";
     if (value != '0') {
-      Navigator.of(context).push(new MaterialPageRoute(
-        builder: (BuildContext context) => new HomePage(),
-      ));
+      String  _type = await databaseHelper.loginData(
+          _emailController.text.trim().toLowerCase(),
+          _passwordController.text.trim());
+      if (_type == 'DOCTOR'){
+        Navigator.of(context).push(
+            new MaterialPageRoute(
+              builder: (BuildContext context) => new DoctorProfile(),
+            )
+        );
+      } else if (_type == 'PATIENT'){
+        Navigator.of(context).push(
+            new MaterialPageRoute(
+              builder: (BuildContext context) => new PatientProfile(),
+            )
+        );
+      }
     }
   }
 

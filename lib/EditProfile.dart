@@ -272,8 +272,6 @@ class _EditProfileState extends State<EditProfile> {
             ],
           ),
 
-
-
           new Padding(
             padding: new EdgeInsets.only(top: 34.0),
           ),
@@ -356,12 +354,13 @@ class _EditProfileState extends State<EditProfile> {
 
       if (day.text.trim().isEmpty &&
           month.text.trim().isEmpty &&
-          year.text.trim().isEmpty ) {
+          year.text.trim().isEmpty ||
+          location.text.trim().isEmpty   ) {
         showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
-                content:Text("Please input the birth date ") ,
+                content:Text("Please input the birth date and Location ") ,
                 title: Text(" Complete ",style: TextStyle(color: Colors.blue),),
                 actions: [
                   FlatButton(
@@ -385,27 +384,13 @@ class _EditProfileState extends State<EditProfile> {
           birthDate=(year2.toString()+'-'+month2.toString()+'-'+day2.toString());
           setState(() {
             databaseHelper.editData(
-                user.text.trim(),
-                bio.text.trim(),
-                profilePic.trim(),
-                facebookUrl.text.trim(),
-                twitterUrl.text.trim(),
-                instagramUrl.text.trim(),
-                academicTitle.text.trim(),
-                speciality.text.trim(),
-                employmentHistory.text.trim(),
-                experience.text.trim(),
-                phoneNumber.text.trim(),
                 birthDate.trim(),
                 location.text.trim(),
             );
           });
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => HomePage()),
-            ModalRoute.withName('/HomePage'),
-          );
+          Navigator.of(context).pop(new MaterialPageRoute(
+            builder: (BuildContext context) => new Menu(),
+          ));
           return print(birthDate);
 
         });
