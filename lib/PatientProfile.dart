@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hp_assistant/Blog.dart';
 import 'package:hp_assistant/HomePage.dart';
@@ -10,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hp_assistant/theme_provider.dart';
 
 import 'change_theme_button_widget.dart';
+
 
 class PatientProfile extends StatefulWidget {
   PatientProfile({Key key}) : super(key: key);
@@ -167,51 +170,40 @@ class _PatientProfileState extends State<PatientProfile> {
       body: new Center(
         child: Column(
           children: [
-            new Padding(padding: EdgeInsets.only(top: 30.0)),
+            new Padding(padding: EdgeInsets.only(top: h*0.05)),
             new Stack(
               children: <Widget>[
                 _imagePath != null
                     ? CircleAvatar(
-                        backgroundImage: FileImage(File(_imagePath)),
-                        backgroundColor: Theme.of(context).iconTheme.color,
-                        radius: 70,
-                      )
+                  backgroundImage: FileImage(File(_imagePath)),
+                  backgroundColor: Theme.of(context).iconTheme.color,
+                  radius: 70,
+                )
                     : CircleAvatar(
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        backgroundImage: _imageFile == null
-                            ? AssetImage('img/Icon0.png')
-                            : FileImage(File(_imageFile.path)),
-                        radius: 70,
-                        child: Container(
-                          padding: EdgeInsets.only(top: 100.0, left: 90.0),
-                          child: InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: ((builder) => bottomSheet()));
-                            },
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
+                  backgroundColor:
+                  Theme.of(context).scaffoldBackgroundColor,
+                  backgroundImage: _imageFile == null
+                      ? AssetImage('img/z.jpg')
+                      : FileImage(File(_imageFile.path)),
+                  radius: 70,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 100.0, left: 90.0),
+                    child: InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: ((builder) => bottomSheet()));
+                      },
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        color: Colors.indigo.shade700,
                       ),
+                    ),
+                  ),
+                ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            new ElevatedButton(
-              onPressed: () {
-                saveImage(_imageFile.path);
-              },
-              child: Text("Save Picture"),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+
 
             Expanded(
               child: FutureBuilder(
@@ -227,45 +219,93 @@ class _PatientProfileState extends State<PatientProfile> {
                   return new Container(
                     child:
 
-                    new Column(children: [
+                    new Column(
+                        children: [
+
+                          new Padding(padding: EdgeInsets.only(top: h * 0.03)),
+                          new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+                              new Text('${data["first_name"]}',
+                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+                              new Padding(padding: EdgeInsets.only(left: w * 0.01,top: h*0.04)),
+                              new Text('${data["last_name"]}',
+                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+                            ],
+                          ),
+
+                          new Text("${data['email']}",
+                            style: TextStyle(color: Colors.grey),),
+                          new Padding(padding: EdgeInsets.only(top: h * 0.03)),
+
+                          new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // new Padding(padding: EdgeInsets.only(left: w * 0.1,top: h*0.04)),
+                              new Text("Bio :",
+                                style: TextStyle(fontSize: 20,
+                                  fontWeight: FontWeight.bold,),),
+                              new Padding(padding: EdgeInsets.only(left: w*0.03)),
+                              new Card(
+                                  child: Column(
+                                    children: [
+                                      new Text("${data["bio"]}",
+                                        style: TextStyle(fontSize: 16,height: 1.4),),
+                                    ],
+                                  )
+                              ),
+
+                            ],
+                          ),
+                          new Padding(padding: EdgeInsets.only(top: h * 0.01)),
+
+                          new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // new Padding(padding: EdgeInsets.only(left: w * 0.1,top: h*0.04)),
+                              new Text("Location :",
+                                style: TextStyle(fontSize: 20,
+                                  fontWeight: FontWeight.bold,),),
+                              new Padding(padding: EdgeInsets.only(left: w*0.03)),
+                              new Text("${data["location"]}",
+                                style: TextStyle(fontSize: 16,height: 1.4),),
+                            ],
+                          ),
+                          new Padding(padding: EdgeInsets.only(top: h * 0.05)),
 
 
-                      new Text(
-                        'First Name: ${data["first_name"]}',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 22.0,
-                        ),
-                      ),
-                      new Text(
-                        'Last Name: ${data["last_name"]}',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 22.0,
-                        ),
-                      ),
-                      new Text(
-                        'Email: ${data['email']}',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 22.0,
-                        ),
-                      ),
-                      new Text(
-                        'Location: ${data["location"]}',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 22.0,
-                        ),
-                      ),
-                      new Text(
-                        'Bio: ${data["bio"]}',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 22.0,
-                        ),
-                      ),
-                    ]),
+                          new RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            onPressed: () {
+                              saveImage(_imageFile.path);
+                            },
+                            child: Text(
+                              "Save Picture",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            color: Colors.teal.shade600,
+                            textColor: Colors.white,),
+
+                          // new Text("Your Personal Info :",
+                          //   style: TextStyle(
+                          //       color: Colors.teal,
+                          //       fontSize: 30,
+                          //       fontFamily: 'Raleway',
+                          //       fontWeight: FontWeight.bold),
+                          //
+                          // ),
+
+                          new Padding(padding: EdgeInsets.only(top: h * 0.01)),
+
+
+                        ]),
+
 
                   );
                 },
