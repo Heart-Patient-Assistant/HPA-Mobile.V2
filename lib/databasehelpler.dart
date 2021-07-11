@@ -167,10 +167,13 @@ class DatabaseHelper {
         body: jsonEncode(<String, String>{
           "birth_date": "$birthDate",
           "location": "$location",
-
         }));
     print('Response status : ${response.statusCode}');
     print('Response body : ${response.body}');
+    print(' body : ${ jsonEncode(<String, String>{
+      "birth_date": "$birthDate",
+      "location": "$location",
+    })}');
   }
 
 

@@ -136,17 +136,14 @@ class _EditPasswordState extends State<EditPassword> {
                             });
                       } else {
                         //setState(() {
-                        //   _futureLogin = databaseHelper.loginData(
+                        //   _futureLogin = databaseHelper.(
                         //       _emailController.text.trim().toLowerCase(),
                         //       _passwordController.text.trim());
                         // });
 
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => Menu()),
-                          ModalRoute.withName('/Menu'),
-                        );
+                        Navigator.of(context).pop(new MaterialPageRoute(
+                          builder: (BuildContext context) => new Menu(),
+                        ));
                       }
                     },
                     color: Colors.teal.shade600,

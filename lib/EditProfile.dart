@@ -52,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: user,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -67,7 +67,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: bio,
+              controller: null,
               keyboardType: TextInputType.multiline,
               maxLines: 5,
               decoration: InputDecoration(
@@ -83,7 +83,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: facebookUrl,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -98,7 +98,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: twitterUrl,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -113,7 +113,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: instagramUrl,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -128,7 +128,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: academicTitle,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -143,7 +143,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: speciality,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -158,7 +158,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: employmentHistory,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -173,7 +173,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: experience,
+              controller: null,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -188,7 +188,7 @@ class _EditProfileState extends State<EditProfile> {
           Container(
             margin: EdgeInsets.only(left: 22, right: 22),
             child: new TextField(
-              controller: phoneNumber,
+              controller: null,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -302,7 +302,7 @@ class _EditProfileState extends State<EditProfile> {
                   new OutlineButton( shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
-                      Navigator.of(context).pop(new MaterialPageRoute(
+                      Navigator.of(context).push(new MaterialPageRoute(
                         builder: (BuildContext context) => new Menu(),
                       ));
                     },
@@ -321,12 +321,7 @@ class _EditProfileState extends State<EditProfile> {
                         borderRadius: BorderRadius.circular(30)),
                       onPressed: (){
                         _finish();
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => HomePage()),
-                          ModalRoute.withName('/HomePage'),
-                        );
+
                       },
                       color: Colors.teal.shade600,
                       child: new Text(
@@ -351,14 +346,13 @@ class _EditProfileState extends State<EditProfile> {
 
   _finish() {
     setState(() {
-
-      if (day.text.trim().isEmpty &&
-          month.text.trim().isEmpty &&
+      if (day.text.trim().isEmpty ||
+          month.text.trim().isEmpty ||
           year.text.trim().isEmpty ||
-          location.text.trim().isEmpty   ) {
+          location.text.trim().isEmpty) {
         showDialog(
             context: context,
-            builder: (context) {
+            builder: (BuildContext context) {
               return AlertDialog(
                 content:Text("Please input the birth date and Location ") ,
                 title: Text(" Complete ",style: TextStyle(color: Colors.blue),),
