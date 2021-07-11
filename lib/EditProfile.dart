@@ -302,7 +302,7 @@ class _EditProfileState extends State<EditProfile> {
                   new OutlineButton( shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
-                      Navigator.of(context).push(new MaterialPageRoute(
+                      Navigator.of(context).pop(new MaterialPageRoute(
                         builder: (BuildContext context) => new Menu(),
                       ));
                     },
