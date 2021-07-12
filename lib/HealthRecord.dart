@@ -31,7 +31,7 @@ class _HealthRecordState extends State<HealthRecord> {
   // var _readingsJson = [ ];
 
   Future getSensorsData ()async {
-    for (var i = 1; i < 38; i++) {
+
       final response = await http.get(
         Uri.parse("https://mahdy.pythonanywhere.com/api/users/sensor/"),
         headers: <String, String>{
@@ -48,11 +48,14 @@ class _HealthRecordState extends State<HealthRecord> {
 
 
     // setState(() {
+      for (var i = 1; i < jsonData.length; i++) {
       sv1 = jsonData[i]["HeartRate"];
       sv2 = jsonData[i]["SpO2"];
+      print(jsonData[i]["HeartRate"]);
     // });
 
   }
+
 
   }
 
