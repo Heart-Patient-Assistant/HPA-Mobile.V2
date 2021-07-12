@@ -115,6 +115,25 @@ class _HealthRecordState extends State<HealthRecord> {
                   subtitle:Text("${sv2} %"),
                 ),
                 new Padding(padding: EdgeInsets.only(top:h*0.03)),
+                new RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  onPressed: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new HealthRecord(),
+                    ));
+                  },
+                  child: Text(
+                    "Refresh",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  color: Colors.teal.shade600,
+                  textColor: Colors.white,
+                ),
 
                 // new Text("Your Health Record",style: TextStyle(
                 //     color: Colors.teal,
